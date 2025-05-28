@@ -1,0 +1,426 @@
+1. Document Structure & Head
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Georgiana Mangiuchi</title>
+Declares the document as HTML5.
+Sets the language to English.
+Sets the character encoding to UTF-8.
+Makes the site responsive on all devices.
+Sets the browser tab title.
+Fonts and Icons
+HTML
+  <!-- Gothic and Handwriting Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Social Icons (brands) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+Loads two Google Fonts: "UnifrakturCook" (gothic) and "Caveat" (handwriting).
+Loads Font Awesome for social media icons.
+Main CSS Style Block
+HTML
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: #2d0005;
+      color: #222;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+Removes margin and padding from the page.
+Sets a dark red background.
+Sets default text color and font.
+Ensures the website is at least the height of the screen.
+Prevents horizontal scrolling.
+Overlay Container
+HTML
+    .overlay {
+      background: transparent;
+      min-height: 100vh;
+      padding-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+A wrapper for the site’s content, making it easy to manage stacking over the curtain.
+Curtain Animation (Theatre Effect)
+HTML
+    .curtain { ... }
+    .curtain-left, .curtain-right { ... }
+    .curtain-left { ... }
+    .curtain-right { ... }
+    body.curtain-opened .curtain-left { ... }
+    body.curtain-opened .curtain-right { ... }
+    .curtain-center { ... }
+    body.curtain-opened .curtain-center { ... }
+The .curtain and its children create an animated effect that looks like two curtains opening from the center.
+.curtain-left and .curtain-right are the left and right curtain "panels".
+When the class curtain-opened is added to <body>, the curtains slide out, revealing the site.
+.curtain-center displays “Welcome” in gothic font as the curtain opens.
+Header: Name and Feather
+HTML
+    .pencil-title-container { ... }
+    .pencil-title { ... }
+    .feather-img { ... }
+Styles the top section with your name in a handwriting font and a feather image angled to look like it’s writing.
+Section Titles and Form Styles
+HTML
+    .gothic-section-title, .gothic-accent, .gothic-form label, .gothic-form input, .gothic-form textarea, .gothic-form button { ... }
+    .gothic-accent { ... }
+Uses the gothic font and color for section headers and form elements.
+Main Content Layout
+HTML
+    .main-grid { ... }
+    .about-section, .family-tree-section { ... }
+    .about-cover { ... }
+    .about-info { ... }
+    .about-section.active .about-info { ... }
+    .about-section.active .about-cover { ... }
+    @keyframes fadeIn { ... }
+    .about-section .gothic-accent { ... }
+    .about-section .gothic-accent-sub { ... }
+    .family-tree-section .tree-cover { ... }
+    .family-tree-content { ... }
+    .family-tree-section.active .family-tree-content { ... }
+    .family-tree-section .gothic-accent { ... }
+    .family-tree-section .gothic-accent-sub { ... }
+.main-grid arranges the About and Family Tree sections side by side (or stacked on small screens).
+.about-section and .family-tree-section are your info boxes.
+Clicking the image in either reveals more information (handled by JavaScript).
+.gothic-accent-sub styles the subtext prompts.
+Book Timeline (Years)
+HTML
+    .timeline-section { ... }
+    .timeline-title { ... }
+    .timeline-grid { ... }
+    .timeline-book { ... }
+    .book-inner { ... }
+    .timeline-book.open .book-inner { ... }
+    .book-front { ... }
+    .book-front .book-year { ... }
+    .book-front .book-emboss { ... }
+    .book-back { ... }
+    .book-back .year-title { ... }
+    .book-back .event-info { ... }
+    .timeline-book:focus { ... }
+    .timeline-section .gothic-accent-sub { ... }
+This section displays your life events as gothic-styled “books.”
+Clicking a book flips it open to show the year’s info (handled by JavaScript).
+Social Media and Contact
+HTML
+    .contacts-section { ... }
+    .contacts-section .gothic-section-title { ... }
+    .social-icons { ... }
+    .social-icons a { ... }
+    /* Color social icon to match their branding */
+    .social-icons a.facebook { color: #1877f3; }
+    .social-icons a.facebook:hover { background: #1877f3; color: #fff; }
+    .social-icons a.instagram { color: #e1306c; }
+    .social-icons a.instagram:hover { background: #e1306c; color: #fff; }
+    .social-icons a.youtube { color: #ff0000; }
+    .social-icons a.youtube:hover { background: #ff0000; color: #fff; }
+    .social-icons a.tiktok { color: #000; }
+    .social-icons a.tiktok:hover { background: #000; color: #fff; }
+    .other-sites { ... }
+    .other-sites a { ... }
+    .contact-form { ... }
+    .contact-form label { ... }
+    .contact-form input, .contact-form textarea { ... }
+    .contact-form input:focus, .contact-form textarea:focus { ... }
+    .contact-form button { ... }
+    .contact-form button:hover { ... }
+    .form-success, .form-error { ... }
+The contact section and social media icons are styled with gothic fonts and brand colors.
+The contact form uses gothic style, and the submit button changes on hover.
+Responsive Design
+HTML
+    @media (max-width:900px) { ... }
+    @media (max-width:600px) { ... }
+Adjusts layout and font sizes for smaller screens.
+2. Body Content
+Curtain Animation HTML
+HTML
+  <div class="curtain" id="curtain">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+    <div class="curtain-center">Welcome</div>
+  </div>
+The curtain covering the site on page load, to be animated open.
+Main Overlay (Website Content)
+HTML
+  <div class="overlay">
+Starts the overlay for all main content.
+
+Header (Name + Feather)
+HTML
+    <div class="pencil-title-container">
+      <span class="pencil-title">Georgiana Mangiuchi</span>
+      <img class="feather-img" src="https://pngimg.com/uploads/feather/feather_PNG12981.png" alt="Feather writing">
+    </div>
+Your name in handwriting style with a feather as if writing it.
+About & Family Tree Sections
+HTML
+    <div class="main-grid">
+      <!-- About Me Section -->
+      <div class="about-section" id="aboutSection">
+        ...
+      </div>
+      <!-- Family Tree Section -->
+      <div class="family-tree-section" id="familyTreeSection">
+        ...
+      </div>
+    </div>
+Two main panels: About and Family Tree.
+Click their images to reveal more info.
+Timeline of Years (Books)
+HTML
+    <section class="timeline-section">
+      <div class="timeline-title">During the Years 1988 - 2025</div>
+      <div class="timeline-grid">
+        <!-- Each button is a gothic book for a year -->
+        <button class="timeline-book" tabindex="0"> ... </button>
+        ...
+      </div>
+      <div class="gothic-accent-sub">Click a gothic book to open and see the story!</div>
+    </section>
+Each book represents a year. Click to “open” and see what happened.
+Contact & Social Media
+HTML
+    <section class="contacts-section">
+      <h2 class="gothic-section-title">Contact & Social</h2>
+      <div class="social-icons">
+        <a class="facebook" ...><i class="fab fa-facebook-f"></i></a>
+        <a class="instagram" ...><i class="fab fa-instagram"></i></a>
+        <a class="youtube" ...><i class="fab fa-youtube"></i></a>
+        <a class="tiktok" ...><i class="fab fa-tiktok"></i></a>
+      </div>
+      <div class="other-sites"> ... </div>
+      <form class="contact-form gothic-form" id="contactForm">
+        ...
+      </form>
+      <div style="...;"><b>All messages will be sent to:</b> ...</div>
+    </section>
+Social media icons in their original colors.
+Your contact form styled in gothic style.
+3. JavaScript Functionality
+HTML
+  <script>
+    // Curtain animation: opens the curtain after page load
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.body.classList.add('curtain-opened');
+        setTimeout(() => {
+          document.getElementById('curtain').style.display = 'none';
+        }, 2400);
+      }, 400);
+    });
+
+    // About Me toggle: Shows/hides about info
+    document.getElementById('aboutCover').onclick = function() {
+      document.getElementById('aboutSection').classList.toggle('active');
+    };
+    // Family Tree toggle: Shows/hides family tree info
+    document.getElementById('treeCover').onclick = function() {
+      document.getElementById('familyTreeSection').classList.toggle('active');
+    };
+    // Timeline Book Open/Close: Only one book open at a time
+    document.querySelectorAll('.timeline-book').forEach((book, idx, allBooks) => {
+      book.addEventListener('click', function(e) {
+        if(this.classList.contains('open')) {
+          this.classList.remove('open');
+          return;
+        }
+        allBooks.forEach(b=>b.classList.remove('open'));
+        this.classList.add('open');
+      });
+      book.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+    // Demo contact form (no real email sending)
+    document.getElementById('contactForm').onsubmit = async function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').textContent = "Thank you! Your message was sent.";
+      document.getElementById('formSuccess').style.display = "block";
+      document.getElementById('formError').style.display = "none";
+      this.reset();
+      setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
+    }
+  </script>
+</body>
+</html>
+Handles the curtain opening animation.
+Makes the About and Family Tree panels interactive.
+Allows only one timeline book to be open at a time.
+Shows a fake "message sent" message on the contact form (for demo).
+Summary
+HTML = Website structure (sections, headings, buttons, etc.)
+CSS = Visual style (colors, layout, fonts, animations)
+JavaScript = Interactivity (curtain, toggling, flipping books, form feedback)
+You can edit the About, Family, and Timeline sections with your own information at any time.
+Change colors, fonts, or add more sections as you wish!
+
+If you’d like me to clarify any specific part or line, just mention it!
+
+You said: ok, now can you please tell me
+ok, now can you please tell me where on this code should I enter the about me picture and how is written the code?
+Copilot said: Absolutely! Here’s exactly where and how you
+Absolutely! Here’s exactly where and how you add your "About Me" picture in the code:
+
+1. Where to Place the Image File
+Put your image (for example, about-me.jpg or georgiana.jpg) in the folder called desktop inside your project root.
+If desktop doesn’t exist, create it or place your image in the main folder and adjust the path in the code as needed.
+2. Where in the Code to Update the Image
+Find this section in your HTML (inside the About Me card):
+
+HTML
+<div class="about-section" id="aboutSection">
+  <div class="gothic-accent">About</div>
+  <img src="desktop/about-cover.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+  <div class="about-info" id="aboutInfo">
+    ...
+  </div>
+  <div class="gothic-accent-sub">Click the image to read more!</div>
+</div>
+3. How to Change the Image
+Replace desktop/about-cover.jpg in the <img ...> tag with the path and name of your image.
+For example, if your image is named georgiana.jpg and is in the desktop folder, it should be:
+HTML
+<img src="desktop/georgiana.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+If your image is in the main folder, use:
+
+HTML
+<img src="georgiana.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+4. Summary
+The <img ...> tag inside the About Me section is where your photo goes.
+Make sure the src attribute matches the path and filename of your image.
+Example (with your own image):
+HTML
+<img src="desktop/georgiana.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+Let me know if you want help resizing/cropping or if you want to use a different folder!
+
+You said: I renamed the picture Aboutme.jpg and I
+I renamed the picture Aboutme.jpg and I put it in the Georgiana-Website forder on the desktop, I replaced the code with desktop/Georgiana-Website/Aboutme.jpg but still is not shown on the website, I saved it already
+Copilot said: Great job trying to update the image!
+Great job trying to update the image! The issue is most likely with the path you used in your HTML. Let’s clarify how image paths work in web development:
+
+How Image Paths Work
+The src attribute in <img src="..."> is relative to your web server’s root or your HTML file’s location, not to your computer’s "Desktop" or user folders.
+If your project is called Georgiana-Website and your HTML file and image are both inside this folder, the path should be just the image filename, like Aboutme.jpg.
+If you put your image inside a subfolder within your project (for example: Georgiana-Website/images/Aboutme.jpg), your path should be images/Aboutme.jpg.
+What You Probably Have
+Example project folder:
+
+Code
+Desktop/
+└── Georgiana-Website/
+    ├── index.html
+    └── Aboutme.jpg
+In this case, your code should be:
+
+HTML
+<img src="Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+What is Wrong with desktop/Georgiana-Website/Aboutme.jpg?
+That path (desktop/Georgiana-Website/Aboutme.jpg) looks like a location on your computer, but when you open index.html in the browser, the browser looks for that folder inside your project, not on your Desktop.
+Unless you have a folder called desktop/Georgiana-Website/ inside your project folder, this path will not work.
+How to Fix
+Make sure your Aboutme.jpg is in the same folder as your index.html.
+Change the <img src="..."> to:
+HTML
+<img src="Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+If You Want to Use a Subfolder
+If you create an images folder inside your project, then move Aboutme.jpg into it and use:
+
+HTML
+<img src="images/Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+Summary Table
+Where is the image?	What should you use in src=?
+Same folder as index.html	Aboutme.jpg
+In images/ folder inside your project	images/Aboutme.jpg
+In desktop/ (not recommended!)	Not recommended, browser can't access it
+Quick Checklist
+ Is the image in the same folder as your HTML file?
+ Is the image name spelled exactly the same (case sensitive!)?
+ Are you using just Aboutme.jpg in your code?
+Sample Code Block
+HTML
+<img src="Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+If you want to use a subfolder, move the image into a folder inside your project and update the path as needed.
+If it’s still not working, let me know:
+
+What is the full file path of your index.html?
+What is the full file path of your Aboutme.jpg?
+And I can give you the exact path to use!
+
+You said: how do I import it on github
+how do I import it on github to see the page?
+Copilot said: Great question! Here’s a step-by-step guide to
+Great question! Here’s a step-by-step guide to put your website on GitHub and view it live using GitHub Pages:
+
+1. Prepare Your Files
+Make sure your project folder (e.g., Georgiana-Website) has:
+
+index.html (your main HTML file)
+Any images (e.g., Aboutme.jpg), folders, and other resources
+2. Create a GitHub Repository
+Go to github.com and log in.
+Click the "+" icon in the top-right and select "New repository".
+Name your repository, e.g., georgiana-website.
+Optionally add a description.
+Choose Public so GitHub Pages can publish it.
+Click Create repository.
+3. Upload Your Files
+Easiest: Upload via GitHub Web
+Open your new repo page.
+Click "Add file" > "Upload files".
+Drag and drop all your files and folders (including images) into the window.
+Click "Commit changes" at the bottom.
+OR
+
+Using Git (if you know how):
+sh
+cd path/to/Georgiana-Website
+git init
+git remote add origin https://github.com/YOUR-USERNAME/georgiana-website.git
+git add .
+git commit -m "Initial website"
+git push -u origin master
+(Replace YOUR-USERNAME with your actual GitHub username.)
+
+4. Enable GitHub Pages
+Go to your repo’s Settings tab.
+Click Pages in the sidebar (or scroll down to the "Pages" section).
+Under "Source", choose the branch as main or master and folder as / (root).
+Click Save.
+After a few seconds, GitHub will show you the link to your live website, like:
+
+Code
+https://your-username.github.io/georgiana-website/
+5. View Your Page
+Click the link GitHub provides or enter it in your browser.
+Your index.html will load as your homepage!
+6. Update Your Website
+Anytime you want to change something:
+
+Edit your files locally.
+Upload them again to GitHub (replace old files).
+Or, if using Git, git add, git commit, and git push your changes.
+The site will auto-update in a minute or two.
+Summary Table
+Step	What to do
+1. Prepare files	All files in one folder
+2. Create repo	On GitHub, new public repository
+3. Upload files	Drag-and-drop on GitHub or use git
+4. Enable Pages	Repo Settings → Pages → set branch/root
+5. Open link	See your live site on GitHub Pages
+If you get stuck, tell me what step you’re on and I’ll guide you!
+If you give me your repo name, I can give you the exact GitHub Pages URL.
+
+How can I help you?

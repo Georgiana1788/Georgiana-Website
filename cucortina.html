@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Georgiana Mangiuchi</title>
+  <!-- Gothic and Handwriting Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #2d0005; /* deep dark red */
+      min-height: 100vh;
+      color: #222;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .overlay {
+      background: transparent; /* No overlay, pure dark red background */
+      min-height: 100vh;
+      padding-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    /* Theatre Curtain Animation */
+    .curtain {
+      position: fixed;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: #2d0005;
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      transition: none;
+    }
+    .curtain-left, .curtain-right {
+      width: 50vw;
+      height: 100vh;
+      background: linear-gradient(120deg, #3d070e 0%, #7b1122 65%, #2d0005 100%);
+      transition: transform 2s cubic-bezier(.77,0,.18,1);
+      will-change: transform;
+    }
+    .curtain-left {
+      border-right: 2px solid #a80020;
+      transform: translateX(0);
+      border-top-right-radius: 30vw 20vh;
+      border-bottom-right-radius: 18vw 9vh;
+      box-shadow: 20px 0 60px #2d0005;
+    }
+    .curtain-right {
+      border-left: 2px solid #a80020;
+      transform: translateX(0);
+      border-top-left-radius: 30vw 20vh;
+      border-bottom-left-radius: 18vw 9vh;
+      box-shadow: -20px 0 60px #2d0005;
+    }
+    body.curtain-opened .curtain-left {
+      transform: translateX(-100vw);
+    }
+    body.curtain-opened .curtain-right {
+      transform: translateX(100vw);
+    }
+    .curtain-center {
+      position: absolute;
+      top: 47%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 2.2rem;
+      font-family: 'UnifrakturCook', cursive;
+      z-index: 2;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 18px #610707, 1px 1px 0 #fff4;
+      pointer-events: none;
+    }
+    body.curtain-opened .curtain-center {
+      opacity: 0;
+      transition: opacity 0.6s 1s;
+    }
+    /* Main content styles (unchanged, minimal extract) */
+    .pencil-title-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-top: 60px;
+      margin-bottom: 10px;
+    }
+    .pencil-title {
+      font-family: 'Caveat', cursive;
+      font-size: 3.5rem;
+      color: #222;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      margin-right: 18px;
+      position: relative;
+      text-shadow: 0 3px 4px #e2e2e2, 1px 1px 0 #bbb;
+      white-space: nowrap;
+    }
+    .feather-img {
+      width: 70px;
+      height: auto;
+      margin-bottom: 6px;
+      margin-left: -18px;
+      transform: rotate(-65deg) scaleX(-1);
+      filter: drop-shadow(1px 5px 7px #0002);
+    }
+    /* ... (all your other styles from previous code remain unchanged) ... */
+    .gothic-section-title,
+    .gothic-accent,
+    .gothic-form label,
+    .gothic-form input,
+    .gothic-form textarea,
+    .gothic-form button {
+      font-family: 'UnifrakturCook', cursive !important;
+      color: #8b0000 !important;
+      letter-spacing: 1.3px;
+    }
+    .gothic-accent {
+      font-size: 2rem;
+      color: #8b0000 !important;
+      text-align: center;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
+    }
+    /* ... (keep the rest of your previous styles for main-grid, sections, timeline, etc.) ... */
+  </style>
+</head>
+<body>
+  <!-- Curtain effect on load -->
+  <div class="curtain" id="curtain">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+    <div class="curtain-center">Welcome</div>
+  </div>
+
+  <div class="overlay">
+
+    <!-- Header: Handwriting + Feather -->
+    <div class="pencil-title-container">
+      <span class="pencil-title">Georgiana Mangiuchi</span>
+      <img class="feather-img" src="https://pngimg.com/uploads/feather/feather_PNG12981.png" alt="Feather writing">
+    </div>
+
+    <!-- ... (rest of your main content code unchanged, as in previous file) ... -->
+    <!-- Copy here your .main-grid, timeline-section, contacts-section, scripts, etc. -->
+    <!-- ... -->
+    <div class="main-grid">
+      <!-- About Me Section -->
+      <div class="about-section" id="aboutSection">
+        <div class="gothic-accent">About</div>
+        <img src="desktop/about-cover.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+        <div class="about-info" id="aboutInfo">
+          <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
+          <p>
+            <!-- Write about yourself here! Example: -->
+            My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
+            I love traveling, documenting moments, and growing together with those around me.<br>
+            <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
+          </p>
+        </div>
+        <div class="gothic-accent-sub">Click the image to read more!</div>
+      </div>
+
+      <!-- Family Tree Section -->
+      <div class="family-tree-section" id="familyTreeSection">
+        <div class="gothic-accent">Family Tree</div>
+        <img src="desktop/green-tree.jpg" alt="Family Tree" class="tree-cover" id="treeCover">
+        <div class="family-tree-content" id="treeContent">
+          <div style="text-align:left; margin:18px auto; max-width:280px;">
+            <strong>Grandparents</strong>
+            <ul>
+              <li>Ion Popescu + Maria Popescu</li>
+              <li>Vasile Ionescu + Elena Ionescu</li>
+            </ul>
+            <strong>Parents</strong>
+            <ul>
+              <li>Florin Mangiuchi + Ana Mangiuchi</li>
+            </ul>
+            <strong>Me</strong>
+            <ul>
+              <li>Georgiana Mangiuchi</li>
+            </ul>
+            <strong>Siblings</strong>
+            <ul>
+              <li>Alexandru Mangiuchi</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gothic-accent-sub">Click the tree for my family!</div>
+      </div>
+    </div>
+
+    <section class="timeline-section">
+      <div class="timeline-title">During the Years 1988 - 2025</div>
+      <div class="timeline-grid">
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">1988</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">1988</div>
+              <div class="event-info">
+                I was born in 1988, starting my life's journey surrounded by family and love.
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2006</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2006</div>
+              <div class="event-info">
+                Graduated high school with honors and unforgettable memories!
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2015</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2015</div>
+              <div class="event-info">
+                Began my professional adventure in my dream field.
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2025</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2025</div>
+              <div class="event-info">
+                Looking forward to new achievements and beautiful moments!
+              </div>
+            </div>
+          </div>
+        </button>
+        <!-- Add more book cards for more years/events as needed -->
+      </div>
+      <div class="gothic-accent-sub">Click a gothic book to open and see the story!</div>
+    </section>
+
+    <section class="contacts-section">
+      <h2 class="gothic-section-title">Contact & Social</h2>
+      <div class="social-icons">
+        <a href="https://facebook.com/yourprofile" target="_blank" title="Facebook"><i class="fab fa-facebook-square"></i></a>
+        <a href="https://instagram.com/yourprofile" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/yourprofile" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://tiktok.com/@yourprofile" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <div class="other-sites">
+        <strong>Other websites:</strong>
+        <a href="https://yourwebsite1.com" target="_blank">yourwebsite1.com</a>
+        <a href="https://yourwebsite2.com" target="_blank">yourwebsite2.com</a>
+      </div>
+      <form class="contact-form gothic-form" id="contactForm">
+        <div class="form-success" id="formSuccess" style="display:none;"></div>
+        <div class="form-error" id="formError" style="display:none;"></div>
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required>
+        <label for="message">Message</label>
+        <textarea id="message" rows="4" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+      <div style="margin-top:14px; color:#8b0000; font-family: 'UnifrakturCook', cursive; letter-spacing: 1px;">
+        <b>All messages will be sent to:</b> <span style="color:#8b0000;">mangiuchigeorgiana@gmail.com</span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Curtain animation
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.body.classList.add('curtain-opened');
+        setTimeout(() => {
+          document.getElementById('curtain').style.display = 'none';
+        }, 2400);
+      }, 400); // Allow a short delay for the curtain to show first
+    });
+
+    // About Me toggle
+    document.getElementById('aboutCover').onclick = function() {
+      document.getElementById('aboutSection').classList.toggle('active');
+    };
+    // Family Tree toggle
+    document.getElementById('treeCover').onclick = function() {
+      document.getElementById('familyTreeSection').classList.toggle('active');
+    };
+    // Timeline Book Open/Close (only one open at a time)
+    document.querySelectorAll('.timeline-book').forEach((book, idx, allBooks) => {
+      book.addEventListener('click', function(e) {
+        if(this.classList.contains('open')) {
+          this.classList.remove('open');
+          return;
+        }
+        allBooks.forEach(b=>b.classList.remove('open'));
+        this.classList.add('open');
+      });
+      book.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    // Contact Form (demo only)
+    document.getElementById('contactForm').onsubmit = async function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').textContent = "Thank you! Your message was sent.";
+      document.getElementById('formSuccess').style.display = "block";
+      document.getElementById('formError').style.display = "none";
+      this.reset();
+      setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
+      // For production, connect to Formspree, EmailJS, or your backend.
+    }
+  </script>
+</body>
+</html>
