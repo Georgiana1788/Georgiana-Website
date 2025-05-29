@@ -11,19 +11,19 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #2d0005;
+      background: #fff; /* CHANGED to pure white */
       min-height: 100vh;
       color: #222;
       overflow-x: hidden;
     }
     .overlay {
-      background: rgba(255,255,255,0.84);
+      background: transparent; /* No overlay needed for pure white bg */
       min-height: 100vh;
       padding-bottom: 40px;
       position: relative;
       z-index: 2;
     }
-    /* Velvet Curtain Effect */
+    /* THEATER VELVET CURTAIN EFFECT */
     .curtain {
       position: fixed;
       left: 0; top: 0; width: 100vw; height: 100vh;
@@ -38,45 +38,66 @@
     .curtain-left, .curtain-right {
       width: 50vw;
       height: 100vh;
-      transition: transform 2.3s cubic-bezier(.86,0,.07,1);
-      background: repeating-linear-gradient(
-        120deg,
-        #6b001a 0px,
-        #a40034 90px,
-        #8b0000 170px,
-        #d52260 340px,
-        #6b001a 390px
-      );
+      transition: transform 2.5s cubic-bezier(.86,0,.07,1);
+      background:
+        repeating-linear-gradient(
+          120deg,
+          #a80011 0px, #b80016 90px, #cf1c23 170px, #e03b3b 340px, #a80011 390px
+        ),
+        linear-gradient(90deg, #a80011 85%, #FFD700 100%);
       background-blend-mode: multiply;
-      box-shadow: 0 0 80px 24px #1a0010 inset;
+      box-shadow: 0 0 100px 30px #6d1d1d inset, 0 0 60px #FFD70088;
       z-index: 10001;
+      position: relative;
+    }
+    .curtain-left:after, .curtain-right:after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 22px;
+      background: linear-gradient(90deg, #FFD700 0%, #b89220 60%, #fff7cc 100%);
+      z-index: 10002;
+    }
+    .curtain-left:after {
+      right: 0;
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+      box-shadow: 2px 0 12px #b8922080;
+    }
+    .curtain-right:after {
+      left: 0;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+      box-shadow: -2px 0 12px #b8922080;
     }
     .curtain-left {
-      border-right: 3px solid #fff;
+      border-right: 0;
       transform: translateX(0);
+      box-shadow: 0 0 80px 24px #a80011 inset, 20px 0 44px #FFD70099;
     }
     .curtain-right {
-      border-left: 3px solid #fff;
+      border-left: 0;
       transform: translateX(0);
+      box-shadow: 0 0 80px 24px #a80011 inset, -20px 0 44px #FFD70099;
     }
     .curtain-center {
       position: absolute;
       left: 50%; top: 50%;
       transform: translate(-50%,-50%);
-      color: #fff;
+      color: #FFD700;
       font-family: 'UnifrakturCook', cursive;
-      font-size: 3.3rem;
-      text-shadow: 0 0 32px #8b0000, 2px 2px 16px #fff8;
+      font-size: 3.4rem;
+      text-shadow: 0 0 32px #a80011, 2px 2px 16px #fff8, 0 0 8px #FFD700;
       pointer-events: none;
       z-index: 10004;
-      letter-spacing: 6px;
-      background: linear-gradient(120deg, #d52260, #fff2, #6b001a 70%);
-      border-radius: 16px;
-      padding: 0.5em 1.4em;
-      border: 2px solid #fff2;
-      box-shadow: 0 0 60px #68001a88;
+      letter-spacing: 7px;
+      background: linear-gradient(120deg, #FFD700 40%, #fff2, #a80011 100%);
+      border-radius: 20px;
+      padding: 0.5em 1.6em;
+      border: 3px solid #FFD700;
+      box-shadow: 0 0 60px #FFD70099, 0 0 120px #a80011aa;
       opacity: 1;
-      transition: opacity 1.2s 0.4s;
+      transition: opacity 1.3s 0.4s;
     }
     body.curtain-opened .curtain-left {
       transform: translateX(-100vw);
@@ -141,7 +162,7 @@
       margin: 24px 0;
     }
     .about-section, .family-tree-section, .photo-film-section {
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.96);
       border-radius: 16px;
       box-shadow: 0 2px 12px #0001;
       padding: 20px;
