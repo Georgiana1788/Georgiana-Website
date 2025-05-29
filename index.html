@@ -9,206 +9,145 @@
   <!-- Font Awesome for Social Icons (brands) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      background: #2d0005;
-      color: #222;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    .overlay {
-      background: transparent;
-      min-height: 100vh;
-      padding-bottom: 40px;
-      position: relative;
-      z-index: 1;
-    }
-    .curtain { /* ... unchanged ... */ }
-    .curtain-left, .curtain-right { /* ... unchanged ... */ }
-    .curtain-left { /* ... unchanged ... */ }
-    .curtain-right { /* ... unchanged ... */ }
-    body.curtain-opened .curtain-left { /* ... unchanged ... */ }
-    body.curtain-opened .curtain-right { /* ... unchanged ... */ }
-    .curtain-center { /* ... unchanged ... */ }
-    body.curtain-opened .curtain-center { /* ... unchanged ... */ }
-    .pencil-title-container { /* ... unchanged ... */ }
-    .pencil-title { /* ... unchanged ... */ }
-    .feather-img { /* ... unchanged ... */ }
-    .gothic-section-title,
-    .gothic-accent,
-    .gothic-form label,
-    .gothic-form input,
-    .gothic-form textarea,
-    .gothic-form button {
-      font-family: 'UnifrakturCook', cursive !important;
-      color: #8b0000 !important;
-      letter-spacing: 1.3px;
-    }
-    .gothic-accent {
-      font-size: 2rem;
-      color: #8b0000 !important;
-      text-align: center;
-      margin: 0;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
-    }
-    .main-grid {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      margin: 24px 0;
-    }
-    .about-section, .family-tree-section, .photo-film-section {
-      background: rgba(255,255,255,0.92);
+    /* ... keep all your previous styles ... */
+
+    /* Put your existing CSS here unchanged up to .contact-form, except: */
+
+    /* --- Make Contact Section Smaller --- */
+    .contacts-section {
+      margin: 30px auto 0 auto;
+      max-width: 520px;
+      background: rgba(255,255,255,0.96);
       border-radius: 16px;
-      box-shadow: 0 2px 12px #0001;
-      padding: 20px;
-      max-width: 380px;
-      min-width: 260px;
+      box-shadow: 0 2px 10px #0001;
+      padding: 18px 10px;
       text-align: center;
-      position: relative;
+      font-size: 0.98rem;
     }
-    .about-cover {
-      width: 100%;
-      max-width: 320px;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px #0002;
-      transition: transform 0.2s;
+    .contacts-section .gothic-section-title {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
     }
-    .about-cover:hover { transform: scale(1.03);}
-    .about-info {
-      display: none;
-      margin-top: 14px;
-      text-align: left;
-    }
-    .about-section.active .about-info {
-      display: block;
-      animation: fadeIn 0.4s;
-    }
-    .about-section.active .about-cover {
-      border: 2px solid #8b0000;
-      box-shadow: 0 0 18px #8b000022;
-    }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-    .about-section .gothic-accent {
+    .social-icons {
+      gap: 14px;
       margin-bottom: 8px;
-      font-size: 2rem;
     }
-    .about-section .gothic-accent-sub {
-      font-family: 'UnifrakturCook', cursive;
-      font-size: 1.2rem;
-      color: #8b0000 !important;
-      margin: 10px 0 0 0;
-      text-shadow: 1px 1px 8px #0002;
-    }
-    .family-tree-section .tree-cover {
-      width: 120px;
-      margin: 0 auto 10px auto;
-      border-radius: 100px;
-      cursor: pointer;
-      border: 2px solid #8b0000;
-      box-shadow: 0 2px 8px #8b000033;
-      transition: transform 0.2s;
-      background: #fff;
-    }
-    .family-tree-content { display: none; padding-top: 16px;}
-    .family-tree-section.active .family-tree-content { display: block;}
-    .family-tree-section .gothic-accent {
+    .social-icons a {
+      width: 38px;
+      height: 38px;
       font-size: 1.5rem;
     }
-    .family-tree-section .gothic-accent-sub {
-      font-family: 'UnifrakturCook', cursive;
-      font-size: 1rem;
-      color: #8b0000 !important;
-      margin: 8px 0 0 0;
-      text-shadow: 1px 1px 8px #0002;
+    .other-sites {
+      margin-top: 8px;
+      font-size: 0.95rem;
     }
-    /* Photo Film Section - styled like the other two */
-    .photo-film-section {
-      background: rgba(255,255,255,0.92);
+    .contact-form {
+      margin: 18px auto 0 auto;
+      max-width: 330px;
+      padding: 12px 6px 12px 6px;
+      border-radius: 8px;
+      font-size:0.96rem;
+      border: 1.5px solid #8b0000;
+    }
+    .contact-form label {
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+    .contact-form input, .contact-form textarea {
+      padding: 6px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      font-size: 0.99rem;
+    }
+    .contact-form button {
+      padding: 7px 18px;
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+    .form-success, .form-error {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+    /* --- End Contact Section Smaller --- */
+
+    /* --- Film Section Styles --- */
+    .film-section {
+      background: rgba(255,255,255,0.93);
       border-radius: 16px;
       box-shadow: 0 2px 12px #0001;
-      padding: 20px;
-      max-width: 380px;
-      min-width: 260px;
+      padding: 18px 12px 22px 12px;
+      max-width: 420px;
+      min-width: 240px;
+      margin: 0 10px;
       text-align: center;
       position: relative;
     }
-    .photo-film-title {
-      font-family: 'UnifrakturCook', cursive;
-      font-size: 2rem;
-      color: #8b0000;
-      margin-bottom: 8px;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
+    .film-title {
+      font-family:'UnifrakturCook',cursive;
+      font-size:1.6rem;
+      color:#8b0000;
+      margin-bottom:12px;
+      letter-spacing:1.2px;
+      text-shadow:1px 1px 7px #0002,0 0 6px #fff4;
     }
-    .photo-film-img-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .film-slider {
+      position: relative;
+      margin: 0 auto 12px auto;
       width: 100%;
-      margin-bottom: 8px;
-      min-height: 170px;
+      max-width: 340px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .photo-film-img {
-      width: 110px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 8px;
+    .film-main-img {
+      width: 100%;
+      max-width: 320px;
+      max-height: 220px;
+      border-radius: 10px;
       box-shadow: 0 2px 8px #0002;
-      border: 2px solid #8b0000;
+      object-fit: contain;
       cursor: pointer;
-      margin: 0 12px;
-      background: #eee;
-      transition: box-shadow 0.2s;
+      background: #f3e8e8;
+      border: 2px solid #8b0000;
+      margin-bottom: 8px;
+      transition: box-shadow 0.18s;
     }
-    .photo-film-arrow {
-      background: #f8eddc;
+    .film-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(255,255,255,0.94);
       color: #8b0000;
       border: none;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      font-size: 1.3rem;
-      box-shadow: 0 2px 7px #8b000033;
       cursor: pointer;
-      transition: background 0.15s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      box-shadow: 0 2px 7px #8b000033;
+      z-index: 2;
+      transition: background 0.18s;
     }
-    .photo-film-arrow:disabled { opacity: 0.4; cursor: default; }
-    .photo-film-info {
-      font-size: 1rem;
-      color: #8b0000;
-      margin-bottom: 4px;
-      font-family: 'Caveat', cursive;
+    .film-arrow:hover { background: #f8eddc; }
+    .film-arrow-left { left: -16px; }
+    .film-arrow-right { right: -16px; }
+    .film-desc {
       background: #f8eddc;
       border-radius: 6px;
+      color: #8b0000;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
       padding: 3px 8px;
       min-height: 24px;
-      width: 95%;
-      box-sizing: border-box;
-      text-align: center;
     }
-    .photo-film-upload {
-      margin-top: 12px;
-      font-size: 0.97rem;
-      color: #8b0000;
-      width: 100%;
-      text-align: center;
+    .film-upload {
+      margin: 8px 0 4px 0;
+      font-size: 0.98rem;
     }
-    .photo-film-upload input[type="file"] {
-      margin-top: 6px;
-    }
-    /* Modal for enlarged photo */
-    .photo-film-modal-bg {
+    /* Modal for Enlarged Film Image */
+    .film-modal-bg {
       position: fixed;
       left:0;top:0;width:100vw;height:100vh;
       background:rgba(0,0,0,0.7);
@@ -217,8 +156,8 @@
       align-items:center;
       justify-content:center;
     }
-    .photo-film-modal-bg.active { display: flex;}
-    .photo-film-modal {
+    .film-modal-bg.active { display: flex;}
+    .film-modal {
       background: #fff;
       border-radius: 14px;
       max-width: 98vw;
@@ -229,25 +168,24 @@
       flex-direction: column;
       align-items: center;
       position:relative;
-      min-width: 260px;
     }
-    .photo-film-modal img {
-      max-width: 240px;
-      max-height: 58vh;
+    .film-modal img {
+      max-width: 80vw;
+      max-height: 70vh;
       border-radius: 10px;
       box-shadow: 0 2px 18px #0004;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
-    .photo-film-modal .photo-film-info {
-      font-size: 1.16rem;
-      margin-bottom: 8px;
+    .film-modal .film-desc {
+      font-size: 1.2rem;
+      color: #8b0000;
       background: #f8eddc;
       border-radius: 8px;
       padding: 7px 14px;
-      width: 90%;
-      max-width: 350px;
+      margin-bottom: 4px;
+      font-family: 'Caveat', cursive;
     }
-    .photo-film-modal .photo-film-close {
+    .film-modal .film-close {
       position: absolute;
       top: 10px; right: 12px;
       background: none;
@@ -257,36 +195,15 @@
       cursor: pointer;
       z-index: 2;
     }
-    .photo-film-modal input[type="text"] {
-      margin-bottom: 4px;
-      width: 90%;
-      font-family:'Caveat',cursive;
-      font-size:1rem;
-      border-radius:6px;
-      border:1px solid #8b0000;
-      padding:4px 7px;
-    }
-    .photo-film-modal button {
-      font-size:1rem; border-radius:6px; background:#8b0000; color:#fff; border:none; padding:5px 12px; cursor:pointer;font-family:'UnifrakturCook',cursive;
-    }
-    /* Contacts section unchanged except for smaller size if you want */
-    .contacts-section {
-      margin: 40px auto 0 auto;
-      max-width: 570px;
-      background: rgba(255,255,255,0.95);
-      border-radius: 16px;
-      box-shadow: 0 2px 10px #0001;
-      padding: 16px 8px 10px 8px;
-      text-align: center;
-      font-size: 0.97rem;
-    }
-    /* ...rest of your CSS unchanged... */
     @media (max-width:900px) {
       .main-grid { flex-direction: column; align-items: center;}
-      .about-section, .family-tree-section, .photo-film-section { width: 98vw; min-width: unset; max-width: 400px;}
+      .timeline-grid { flex-direction: column; gap: 18px;}
+      .film-section { max-width: 98vw;}
     }
     @media (max-width:600px) {
-      .about-section, .family-tree-section, .photo-film-section { width: 99vw; min-width: unset; max-width: 99vw;}
+      .film-section { max-width: 100vw;}
+      .film-main-img { max-width: 98vw;}
+      .film-modal img { max-width: 98vw; }
       .pencil-title { font-size: 2rem; }
       .feather-img { width: 38px;}
     }
@@ -309,21 +226,7 @@
     </div>
 
     <div class="main-grid">
-      <!-- About Me Section -->
-      <div class="about-section" id="aboutSection">
-        <div class="gothic-accent">About</div>
-        <img src="images/Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
-        <div class="about-info" id="aboutInfo">
-          <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
-          <p>
-            My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
-            I love traveling, documenting moments, and growing together with those around me.<br>
-            <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
-          </p>
-        </div>
-        <div class="gothic-accent-sub">Click the image to read more!</div>
-      </div>
-      <!-- Family Tree Section -->
+      <!-- Family Tree Section FIRST -->
       <div class="family-tree-section" id="familyTreeSection">
         <div class="gothic-accent">Family Tree</div>
         <img src="images/Arbore.png" alt="Family Tree" class="tree-cover" id="treeCover">
@@ -350,48 +253,159 @@
         </div>
         <div class="gothic-accent-sub">Click the tree for my family!</div>
       </div>
-      <!-- Photo Film Section -->
-      <div class="photo-film-section" id="photoFilmSection">
-        <div class="photo-film-title gothic-accent">Photo Roll</div>
-        <div class="photo-film-viewer" id="photoFilmViewer">
-          <div class="photo-film-img-container">
-            <button class="photo-film-arrow" id="photoPrev" aria-label="Previous photo" disabled>&#8592;</button>
-            <img class="photo-film-img" id="photoFilmImg" src="" alt="Film photo" style="display:none;">
-            <button class="photo-film-arrow" id="photoNext" aria-label="Next photo" disabled>&#8594;</button>
-          </div>
-          <div class="photo-film-info" id="photoFilmInfo"></div>
+
+      <!-- About Me Section SECOND -->
+      <div class="about-section" id="aboutSection">
+        <div class="gothic-accent">About</div>
+        <img src="images/Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+        <div class="about-info" id="aboutInfo">
+          <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
+          <p>
+            My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
+            I love traveling, documenting moments, and growing together with those around me.<br>
+            <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
+          </p>
         </div>
-        <div class="photo-film-upload">
-          <label for="photoFilmInput" style="cursor:pointer;">Add photos (max 10):</label>
-          <input type="file" id="photoFilmInput" accept="image/*" multiple>
+        <div class="gothic-accent-sub">Click the image to read more!</div>
+      </div>
+
+      <!-- FILM SECTION THIRD -->
+      <div class="film-section" id="filmSection">
+        <div class="film-title">Photo Film</div>
+        <div class="film-slider" id="filmSlider">
+          <button class="film-arrow film-arrow-left" id="filmPrev" aria-label="Previous photo" style="display:none;">&#8592;</button>
+          <img class="film-main-img" id="filmMainImg" src="" alt="Film photo" style="display:none;">
+          <div class="film-desc" id="filmDesc"></div>
+          <button class="film-arrow film-arrow-right" id="filmNext" aria-label="Next photo" style="display:none;">&#8594;</button>
         </div>
-        <div style="color:#8b0000; font-size:0.92rem; margin-top:5px;">
-          <span>Click photo to enlarge and add info about year and place.</span>
+        <div class="film-upload">
+          <label for="filmInput" style="cursor:pointer;">Add photos (max 10):</label>
+          <input type="file" id="filmInput" accept="image/*" multiple style="display:inline;">
+        </div>
+        <div style="color:#8b0000; font-size:0.95rem; margin-top:5px;">
+          <span>Click photo to enlarge and add description.</span>
         </div>
       </div>
     </div>
-
-    <!-- ...timeline and contact sections unchanged... -->
 
     <section class="timeline-section">
-      <!-- ... Timeline as before ... -->
-    </section>
-    <section class="contacts-section">
-      <!-- ... Contact form and socials as before ... -->
-    </section>
-    <!-- Modal for Photo Film -->
-    <div class="photo-film-modal-bg" id="photoFilmModalBg" tabindex="-1" aria-modal="true">
-      <div class="photo-film-modal" id="photoFilmModal">
-        <button class="photo-film-close" id="photoFilmModalClose" aria-label="Close">&times;</button>
-        <img src="" id="photoFilmModalImg" alt="Enlarged photo">
-        <div class="photo-film-info" id="photoFilmModalInfo"></div>
-        <input type="text" id="photoFilmModalYear" placeholder="Year (e.g. 2024)">
-        <input type="text" id="photoFilmModalDesc" placeholder="Place / Description...">
-        <button id="photoFilmModalSave">Save</button>
+      <div class="timeline-title">During the Years 1988 - 2025</div>
+      <div class="timeline-grid">
+        <!-- Timeline Books as before -->
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">1991</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">1991</div>
+               <img src="images/1991.jpg" alt="1991">
+              <div class="event-info">
+                I was born in 1988, starting my life's journey surrounded by family and love.
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2006</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2006</div>
+              <div class="event-info">
+                Graduated high school with honors and unforgettable memories!
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2015</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2015</div>
+              <div class="event-info">
+                Began my professional adventure in my dream field.
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2025</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2025</div>
+              <div class="event-info">
+                Looking forward to new achievements and beautiful moments!
+              </div>
+            </div>
+          </div>
+        </button>
       </div>
-    </div>
+      <div class="gothic-accent-sub">Click a gothic book to open and see the story!</div>
+    </section>
 
+    <section class="contacts-section">
+      <h2 class="gothic-section-title">Contact & Social</h2>
+      <div class="social-icons">
+        <a class="facebook" href="https://facebook.com/yourprofile" target="_blank" title="Facebook" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="instagram" href="https://instagram.com/yourprofile" target="_blank" title="Instagram" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a class="youtube" href="https://youtube.com/yourprofile" target="_blank" title="YouTube" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a class="tiktok" href="https://tiktok.com/@yourprofile" target="_blank" title="TikTok" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+      <div class="other-sites">
+        <strong>Other websites:</strong>
+        <a href="https://yourwebsite1.com" target="_blank">yourwebsite1.com</a>
+        <a href="https://yourwebsite2.com" target="_blank">yourwebsite2.com</a>
+      </div>
+      <form class="contact-form gothic-form" id="contactForm">
+        <div class="form-success" id="formSuccess" style="display:none;"></div>
+        <div class="form-error" id="formError" style="display:none;"></div>
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required>
+        <label for="message">Message</label>
+        <textarea id="message" rows="3" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+      <div style="margin-top:10px; color:#8b0000; font-family: 'UnifrakturCook', cursive; letter-spacing: 1px;">
+        <b>All messages will be sent to:</b> <span style="color:#8b0000;">mangiuchigeorgiana@gmail.com</span>
+      </div>
+    </section>
   </div>
+
+  <!-- Modal for Film Section -->
+  <div class="film-modal-bg" id="filmModalBg" tabindex="-1" aria-modal="true">
+    <div class="film-modal" id="filmModal">
+      <button class="film-close" id="filmModalClose" aria-label="Close">&times;</button>
+      <div class="film-desc" id="filmModalDesc"></div>
+      <img src="" id="filmModalImg" alt="Enlarged film photo">
+      <input type="text" id="filmModalInput" placeholder="Add/edit description..." style="font-size:1rem; border-radius:7px; border:1px solid #8b0000; padding:5px 7px; margin-bottom:7px; width:80%;">
+      <button id="filmModalSave" style="font-size:1rem; border-radius:6px; background:#8b0000; color:#fff; border:none; padding:5px 12px; cursor:pointer;">Save</button>
+    </div>
+  </div>
+
   <script>
     // Curtain animation
     window.addEventListener('DOMContentLoaded', () => {
@@ -402,12 +416,15 @@
         }, 2400);
       }, 400);
     });
+    // About Me toggle
     document.getElementById('aboutCover').onclick = function() {
       document.getElementById('aboutSection').classList.toggle('active');
     };
+    // Family Tree toggle
     document.getElementById('treeCover').onclick = function() {
       document.getElementById('familyTreeSection').classList.toggle('active');
     };
+    // Timeline Book Open/Close (only one open at a time)
     document.querySelectorAll('.timeline-book').forEach((book, idx, allBooks) => {
       book.addEventListener('click', function(e) {
         if(this.classList.contains('open')) {
@@ -424,6 +441,8 @@
         }
       });
     });
+
+    // Contact Form (demo only)
     document.getElementById('contactForm').onsubmit = async function(e) {
       e.preventDefault();
       document.getElementById('formSuccess').textContent = "Thank you! Your message was sent.";
@@ -431,103 +450,102 @@
       document.getElementById('formError').style.display = "none";
       this.reset();
       setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
+      // For production, connect to Formspree, EmailJS, or your backend.
     }
-    // ===== Photo Roll Logic =====
-    const photoFilmInput = document.getElementById('photoFilmInput');
-    const photoFilmImg = document.getElementById('photoFilmImg');
-    const photoPrev = document.getElementById('photoPrev');
-    const photoNext = document.getElementById('photoNext');
-    const photoFilmInfo = document.getElementById('photoFilmInfo');
-    const photoFilmModalBg = document.getElementById('photoFilmModalBg');
-    const photoFilmModal = document.getElementById('photoFilmModal');
-    const photoFilmModalImg = document.getElementById('photoFilmModalImg');
-    const photoFilmModalInfo = document.getElementById('photoFilmModalInfo');
-    const photoFilmModalClose = document.getElementById('photoFilmModalClose');
-    const photoFilmModalYear = document.getElementById('photoFilmModalYear');
-    const photoFilmModalDesc = document.getElementById('photoFilmModalDesc');
-    const photoFilmModalSave = document.getElementById('photoFilmModalSave');
-    let photoFilmPhotos = [];
-    let photoFilmIndex = 0;
-    photoFilmInput.addEventListener('change', function(e){
+
+    // =========================
+    // FILM SECTION FUNCTIONALITY
+    // =========================
+    const filmInput = document.getElementById('filmInput');
+    const filmMainImg = document.getElementById('filmMainImg');
+    const filmDesc = document.getElementById('filmDesc');
+    const filmPrev = document.getElementById('filmPrev');
+    const filmNext = document.getElementById('filmNext');
+    const filmSlider = document.getElementById('filmSlider');
+    const filmModalBg = document.getElementById('filmModalBg');
+    const filmModal = document.getElementById('filmModal');
+    const filmModalImg = document.getElementById('filmModalImg');
+    const filmModalInput = document.getElementById('filmModalInput');
+    const filmModalDesc = document.getElementById('filmModalDesc');
+    const filmModalClose = document.getElementById('filmModalClose');
+    const filmModalSave = document.getElementById('filmModalSave');
+    let filmPhotos = [];
+    let filmIndex = 0;
+
+    // Each photo is { src, desc }
+    filmInput.addEventListener('change', function(e){
       const files = Array.from(e.target.files).slice(0,10);
       if (files.length === 0) return;
-      photoFilmPhotos = [];
+      filmPhotos = [];
       let loaded = 0;
       files.forEach((file, idx) => {
         const reader = new FileReader();
         reader.onload = function(ev) {
-          photoFilmPhotos.push({src: ev.target.result, year: '', desc: ''});
+          filmPhotos.push({src: ev.target.result, desc: ''});
           loaded++;
           if (loaded === files.length) {
-            photoFilmIndex = 0;
-            showPhotoFilm();
+            filmIndex = 0;
+            showFilmPhoto();
           }
         };
         reader.readAsDataURL(file);
       });
     });
-    function showPhotoFilm() {
-      if (!photoFilmPhotos.length) {
-        photoFilmImg.style.display = 'none';
-        photoFilmInfo.textContent = '';
-        photoPrev.disabled = true;
-        photoNext.disabled = true;
+
+    function showFilmPhoto() {
+      if (!filmPhotos.length) {
+        filmMainImg.style.display = 'none';
+        filmDesc.textContent = '';
+        filmPrev.style.display = 'none';
+        filmNext.style.display = 'none';
         return;
       }
-      photoFilmImg.style.display = 'block';
-      photoFilmImg.src = photoFilmPhotos[photoFilmIndex].src;
-      let year = photoFilmPhotos[photoFilmIndex].year?.trim();
-      let desc = photoFilmPhotos[photoFilmIndex].desc?.trim();
-      photoFilmInfo.textContent = (year? year : '') + (desc? (" • " + desc) : (!year && !desc ? "(No info)" : ""));
-      photoPrev.disabled = (photoFilmIndex === 0);
-      photoNext.disabled = (photoFilmIndex === photoFilmPhotos.length-1);
+      filmMainImg.style.display = 'block';
+      filmMainImg.src = filmPhotos[filmIndex].src;
+      filmDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
+      filmPrev.style.display = filmIndex > 0 ? 'inline-block' : 'none';
+      filmNext.style.display = filmIndex < filmPhotos.length-1 ? 'inline-block' : 'none';
     }
-    photoPrev.onclick = function() {
-      if (photoFilmIndex > 0) { photoFilmIndex--; showPhotoFilm(); }
+    filmPrev.onclick = function() {
+      if (filmIndex > 0) { filmIndex--; showFilmPhoto(); }
     }
-    photoNext.onclick = function() {
-      if (photoFilmIndex < photoFilmPhotos.length-1) { photoFilmIndex++; showPhotoFilm(); }
+    filmNext.onclick = function() {
+      if (filmIndex < filmPhotos.length-1) { filmIndex++; showFilmPhoto(); }
     }
-    photoFilmImg.onclick = function() {
-      if (!photoFilmPhotos.length) return;
-      photoFilmModalBg.classList.add('active');
-      photoFilmModalImg.src = photoFilmPhotos[photoFilmIndex].src;
-      let year = photoFilmPhotos[photoFilmIndex].year?.trim();
-      let desc = photoFilmPhotos[photoFilmIndex].desc?.trim();
-      photoFilmModalInfo.textContent = (year? year : '') + (desc? (" • " + desc) : (!year && !desc ? "(No info)" : ""));
-      photoFilmModalYear.value = year || '';
-      photoFilmModalDesc.value = desc || '';
+    filmMainImg.onclick = function() {
+      if (!filmPhotos.length) return;
+      filmModalBg.classList.add('active');
+      filmModalImg.src = filmPhotos[filmIndex].src;
+      filmModalDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
+      filmModalInput.value = filmPhotos[filmIndex].desc || '';
+      filmModalInput.focus();
     }
-    photoFilmModalClose.onclick = function() {
-      photoFilmModalBg.classList.remove('active');
+    filmModalClose.onclick = function() {
+      filmModalBg.classList.remove('active');
     }
-    photoFilmModalBg.onclick = function(e) {
-      if (e.target === photoFilmModalBg) photoFilmModalBg.classList.remove('active');
+    filmModalBg.onclick = function(e) {
+      if (e.target === filmModalBg) filmModalBg.classList.remove('active');
     }
-    photoFilmModalSave.onclick = function() {
-      if (!photoFilmPhotos.length) return;
-      let newYear = photoFilmModalYear.value;
-      let newDesc = photoFilmModalDesc.value;
-      photoFilmPhotos[photoFilmIndex].year = newYear;
-      photoFilmPhotos[photoFilmIndex].desc = newDesc;
-      showPhotoFilm();
-      let year = newYear?.trim();
-      let desc = newDesc?.trim();
-      photoFilmModalInfo.textContent = (year? year : '') + (desc? (" • " + desc) : (!year && !desc ? "(No info)" : ""));
-      photoFilmModalBg.classList.remove('active');
+    filmModalSave.onclick = function() {
+      if (!filmPhotos.length) return;
+      filmPhotos[filmIndex].desc = filmModalInput.value;
+      filmDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
+      filmModalDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
+      filmModalBg.classList.remove('active');
     }
+    filmModalInput.addEventListener('keydown', function(e){
+      if (e.key === 'Enter') { filmModalSave.click(); }
+    });
+    // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-      if (!photoFilmPhotos.length) return;
-      if (photoFilmModalBg.classList.contains('active')) {
-        if (e.key === 'Escape') photoFilmModalBg.classList.remove('active');
+      if (!filmPhotos.length) return;
+      if (filmModalBg.classList.contains('active')) {
+        if (e.key === 'Escape') filmModalBg.classList.remove('active');
       } else {
-        if (e.key === 'ArrowLeft') { if (photoFilmIndex>0) {photoFilmIndex--; showPhotoFilm();}}
-        if (e.key === 'ArrowRight') { if (photoFilmIndex<photoFilmPhotos.length-1) {photoFilmIndex++; showPhotoFilm();}}
+        if (e.key === 'ArrowLeft') { if (filmIndex>0) {filmIndex--; showFilmPhoto();}}
+        if (e.key === 'ArrowRight') { if (filmIndex<filmPhotos.length-1) {filmIndex++; showFilmPhoto();}}
       }
     });
-    photoFilmModalYear.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
-    photoFilmModalDesc.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
-    showPhotoFilm();
   </script>
 </body>
 </html>
