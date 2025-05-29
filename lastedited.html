@@ -81,6 +81,11 @@
       min-width: 260px;
       text-align: center;
       position: relative;
+      min-height: 410px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     .about-cover {
       width: 100%;
@@ -105,10 +110,7 @@
       box-shadow: 0 0 18px #8b000022;
     }
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-    .about-section .gothic-accent {
-      margin-bottom: 8px;
-      font-size: 2rem;
-    }
+    .about-section .gothic-accent { margin-bottom: 8px; font-size: 2rem; }
     .about-section .gothic-accent-sub {
       font-family: 'UnifrakturCook', cursive;
       font-size: 1.2rem;
@@ -128,9 +130,7 @@
     }
     .family-tree-content { display: none; padding-top: 16px;}
     .family-tree-section.active .family-tree-content { display: block;}
-    .family-tree-section .gothic-accent {
-      font-size: 1.5rem;
-    }
+    .family-tree-section .gothic-accent { font-size: 1.5rem; }
     .family-tree-section .gothic-accent-sub {
       font-family: 'UnifrakturCook', cursive;
       font-size: 1rem;
@@ -212,9 +212,7 @@
       width: 100%;
       text-align: center;
     }
-    .photo-film-upload input[type="file"] {
-      margin-top: 6px;
-    }
+    .photo-film-upload input[type="file"] { margin-top: 6px; }
     /* Modal for enlarged photo */
     .photo-film-modal-bg {
       position: fixed;
@@ -310,14 +308,13 @@
     .form-success, .form-error { font-size: 0.97rem; margin-bottom: 5px;}
     @media (max-width:900px) {
       .main-grid { flex-direction: column; align-items: center;}
-      .timeline-grid { flex-direction: column; gap: 18px;}
       .contacts-section { max-width: 97vw;}
     }
     @media (max-width:600px) {
-      .timeline-book { width: 96vw; max-width: 370px;}
       .pencil-title { font-size: 2rem; }
       .feather-img { width: 38px;}
       .contacts-section { max-width: 99vw;}
+      .about-section, .family-tree-section, .photo-film-section { max-width:99vw; }
     }
   </style>
 </head>
@@ -400,10 +397,11 @@
         <button id="photoFilmModalSave">Save</button>
       </div>
     </div>
-    <!-- The rest of your sections (timeline, contacts, etc) unchanged -->
+    <!-- Timeline section and contact section as before -->
     <section class="timeline-section">
       <div class="timeline-title">During the Years 1988 - 2025</div>
       <div class="timeline-grid">
+        <!-- Timeline Book Cards: Add more as needed -->
         <button class="timeline-book" tabindex="0">
           <div class="book-inner">
             <div class="book-front">
@@ -522,7 +520,6 @@
         }
       });
     });
-
     // Contact Form (demo only)
     document.getElementById('contactForm').onsubmit = async function(e) {
       e.preventDefault();
