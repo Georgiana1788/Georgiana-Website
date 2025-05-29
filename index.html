@@ -14,11 +14,62 @@
       background: #2d0005;
       min-height: 100vh;
       color: #222;
+      overflow-x: hidden;
     }
     .overlay {
       background: rgba(255,255,255,0.84);
       min-height: 100vh;
       padding-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    /* Curtain effect */
+    .curtain {
+      position: fixed;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      background: none;
+    }
+    .curtain-left, .curtain-right {
+      width: 50vw;
+      height: 100vh;
+      transition: transform 2s cubic-bezier(.86,0,.07,1);
+      background: linear-gradient(120deg, #8b0000 78%, #fff 100%);
+      z-index: 10001;
+    }
+    .curtain-left {
+      border-right: 2px solid #fff;
+      transform: translateX(0);
+    }
+    .curtain-right {
+      border-left: 2px solid #fff;
+      transform: translateX(0);
+    }
+    .curtain-center {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      color: #fff;
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 3rem;
+      text-shadow: 2px 2px 16px #8b0000, 1px 1px 0 #fff5;
+      pointer-events: none;
+      z-index: 10004;
+      letter-spacing: 4px;
+    }
+    body.curtain-opened .curtain-left {
+      transform: translateX(-100vw);
+    }
+    body.curtain-opened .curtain-right {
+      transform: translateX(100vw);
+    }
+    body.curtain-opened .curtain-center {
+      opacity: 0;
+      transition: opacity 1.1s 0.6s;
     }
     .pencil-title-container {
       display: flex;
@@ -117,27 +168,40 @@
       color: #8b0000 !important;
       margin: 10px 0 0 0;
       text-shadow: 1px 1px 8px #0002;
+      width: 100%;
+      text-align: center;
+    }
+    /* Family Tree specific layout */
+    .family-tree-section .tree-cover-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
     .family-tree-section .tree-cover {
-      width: 120px;
-      margin: 0 auto 10px auto;
+      display: block;
+      margin: 0 auto;
+      width: 140px;
+      height: auto;
       border-radius: 100px;
       cursor: pointer;
       border: 2px solid #8b0000;
       box-shadow: 0 2px 8px #8b000033;
-      transition: transform 0.2s;
       background: #fff;
+      transition: transform 0.2s;
+    }
+    .family-tree-section .gothic-accent-sub {
+      margin: 10px 0 0 0;
+      width: 100%;
+      text-align: center;
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1.2rem;
+      color: #8b0000 !important;
+      text-shadow: 1px 1px 8px #0002;
     }
     .family-tree-content { display: none; padding-top: 16px;}
     .family-tree-section.active .family-tree-content { display: block;}
     .family-tree-section .gothic-accent { font-size: 1.5rem; }
-    .family-tree-section .gothic-accent-sub {
-      font-family: 'UnifrakturCook', cursive;
-      font-size: 1rem;
-      color: #8b0000 !important;
-      margin: 8px 0 0 0;
-      text-shadow: 1px 1px 8px #0002;
-    }
     /* --- Photo Film Section Styles --- */
     .photo-film-title {
       font-family: 'UnifrakturCook', cursive;
@@ -147,6 +211,17 @@
       margin-bottom: 8px;
       letter-spacing: 2px;
       text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
+    }
+    .photo-film-hint {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1.2rem;
+      color: #8b0000 !important;
+      text-shadow: 1px 1px 8px #0002;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+      margin-top: 0;
+      letter-spacing: 1px;
     }
     .photo-film-viewer {
       flex: 1 1 auto;
@@ -319,6 +394,12 @@
   </style>
 </head>
 <body>
+  <!-- Curtain effect on load -->
+  <div class="curtain" id="curtain">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+    <div class="curtain-center">Welcome</div>
+  </div>
   <div class="overlay">
     <div class="pencil-title-container">
       <span class="pencil-title">Georgiana Mangiuchi</span>
@@ -342,7 +423,10 @@
       <!-- Family Tree Section -->
       <div class="family-tree-section" id="familyTreeSection">
         <div class="gothic-accent">Family Tree</div>
-        <img src="images/Arbore.png" alt="Family Tree" class="tree-cover" id="treeCover">
+        <div class="tree-cover-box">
+          <img src="images/Arbore.png" alt="Family Tree" class="tree-cover" id="treeCover">
+          <div class="gothic-accent-sub">Click the tree for my family!</div>
+        </div>
         <div class="family-tree-content" id="treeContent">
           <div style="text-align:left; margin:18px auto; max-width:280px;">
             <strong>Grandparents</strong>
@@ -364,11 +448,11 @@
             </ul>
           </div>
         </div>
-        <div class="gothic-accent-sub">Click the tree for my family!</div>
       </div>
       <!-- Photo Film Section -->
       <div class="photo-film-section" id="photoFilmSection">
         <div class="photo-film-title gothic-accent">Photo Roll</div>
+        <div class="photo-film-hint">Click the arrows to browse photos!</div>
         <div class="photo-film-viewer" id="photoFilmViewer">
           <div class="photo-film-img-container">
             <button class="photo-film-arrow" id="photoPrev" aria-label="Previous photo" disabled>&#8592;</button>
@@ -397,7 +481,7 @@
         <button id="photoFilmModalSave">Save</button>
       </div>
     </div>
-    <!-- Timeline section and contact section as before -->
+    <!-- Timeline and contact section as before -->
     <section class="timeline-section">
       <div class="timeline-title">During the Years 1988 - 2025</div>
       <div class="timeline-grid">
@@ -495,6 +579,15 @@
     </section>
   </div>
   <script>
+    // Curtain animation
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.body.classList.add('curtain-opened');
+        setTimeout(() => {
+          document.getElementById('curtain').style.display = 'none';
+        }, 2400);
+      }, 400);
+    });
     // About Me toggle
     document.getElementById('aboutCover').onclick = function() {
       document.getElementById('aboutSection').classList.toggle('active');
@@ -503,32 +596,6 @@
     document.getElementById('treeCover').onclick = function() {
       document.getElementById('familyTreeSection').classList.toggle('active');
     };
-    // Timeline Book Open/Close (only one open at a time)
-    document.querySelectorAll('.timeline-book').forEach((book, idx, allBooks) => {
-      book.addEventListener('click', function(e) {
-        if(this.classList.contains('open')) {
-          this.classList.remove('open');
-          return;
-        }
-        allBooks.forEach(b=>b.classList.remove('open'));
-        this.classList.add('open');
-      });
-      book.addEventListener('keydown', function(e) {
-        if(e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.click();
-        }
-      });
-    });
-    // Contact Form (demo only)
-    document.getElementById('contactForm').onsubmit = async function(e) {
-      e.preventDefault();
-      document.getElementById('formSuccess').textContent = "Thank you! Your message was sent.";
-      document.getElementById('formSuccess').style.display = "block";
-      document.getElementById('formError').style.display = "none";
-      this.reset();
-      setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
-    }
     // ===== Photo Roll Logic =====
     const photoFilmInput = document.getElementById('photoFilmInput');
     const photoFilmImg = document.getElementById('photoFilmImg');
@@ -625,6 +692,32 @@
     photoFilmModalYear.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
     photoFilmModalDesc.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
     showPhotoFilm();
+    // Timeline Book Open/Close (only one open at a time)
+    document.querySelectorAll('.timeline-book').forEach((book, idx, allBooks) => {
+      book.addEventListener('click', function(e) {
+        if(this.classList.contains('open')) {
+          this.classList.remove('open');
+          return;
+        }
+        allBooks.forEach(b=>b.classList.remove('open'));
+        this.classList.add('open');
+      });
+      book.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+    // Contact Form (demo only)
+    document.getElementById('contactForm').onsubmit = async function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').textContent = "Thank you! Your message was sent.";
+      document.getElementById('formSuccess').style.display = "block";
+      document.getElementById('formError').style.display = "none";
+      this.reset();
+      setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
+    }
   </script>
 </body>
 </html>
