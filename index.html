@@ -23,7 +23,7 @@
       position: relative;
       z-index: 2;
     }
-    /* Curtain effect */
+    /* Velvet Curtain Effect */
     .curtain {
       position: fixed;
       left: 0; top: 0; width: 100vw; height: 100vh;
@@ -33,20 +33,30 @@
       align-items: stretch;
       justify-content: stretch;
       background: none;
+      overflow: hidden;
     }
     .curtain-left, .curtain-right {
       width: 50vw;
       height: 100vh;
-      transition: transform 2s cubic-bezier(.86,0,.07,1);
-      background: linear-gradient(120deg, #8b0000 78%, #fff 100%);
+      transition: transform 2.3s cubic-bezier(.86,0,.07,1);
+      background: repeating-linear-gradient(
+        120deg,
+        #6b001a 0px,
+        #a40034 90px,
+        #8b0000 170px,
+        #d52260 340px,
+        #6b001a 390px
+      );
+      background-blend-mode: multiply;
+      box-shadow: 0 0 80px 24px #1a0010 inset;
       z-index: 10001;
     }
     .curtain-left {
-      border-right: 2px solid #fff;
+      border-right: 3px solid #fff;
       transform: translateX(0);
     }
     .curtain-right {
-      border-left: 2px solid #fff;
+      border-left: 3px solid #fff;
       transform: translateX(0);
     }
     .curtain-center {
@@ -55,11 +65,18 @@
       transform: translate(-50%,-50%);
       color: #fff;
       font-family: 'UnifrakturCook', cursive;
-      font-size: 3rem;
-      text-shadow: 2px 2px 16px #8b0000, 1px 1px 0 #fff5;
+      font-size: 3.3rem;
+      text-shadow: 0 0 32px #8b0000, 2px 2px 16px #fff8;
       pointer-events: none;
       z-index: 10004;
-      letter-spacing: 4px;
+      letter-spacing: 6px;
+      background: linear-gradient(120deg, #d52260, #fff2, #6b001a 70%);
+      border-radius: 16px;
+      padding: 0.5em 1.4em;
+      border: 2px solid #fff2;
+      box-shadow: 0 0 60px #68001a88;
+      opacity: 1;
+      transition: opacity 1.2s 0.4s;
     }
     body.curtain-opened .curtain-left {
       transform: translateX(-100vw);
@@ -69,7 +86,6 @@
     }
     body.curtain-opened .curtain-center {
       opacity: 0;
-      transition: opacity 1.1s 0.6s;
     }
     .pencil-title-container {
       display: flex;
@@ -114,6 +130,7 @@
       margin: 0;
       letter-spacing: 2px;
       text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
+      width: 100%;
     }
     .main-grid {
       display: flex;
@@ -183,7 +200,7 @@
       margin: 0 auto;
       width: 140px;
       height: auto;
-      border-radius: 100px;
+      border-radius: 50%;
       cursor: pointer;
       border: 2px solid #8b0000;
       box-shadow: 0 2px 8px #8b000033;
