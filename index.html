@@ -1,3 +1,5 @@
+publicat 1:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,201 +11,435 @@
   <!-- Font Awesome for Social Icons (brands) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    /* ... keep all your previous styles ... */
-
-    /* Put your existing CSS here unchanged up to .contact-form, except: */
-
-    /* --- Make Contact Section Smaller --- */
-    .contacts-section {
-      margin: 30px auto 0 auto;
-      max-width: 520px;
-      background: rgba(255,255,255,0.96);
-      border-radius: 16px;
-      box-shadow: 0 2px 10px #0001;
-      padding: 18px 10px;
-      text-align: center;
-      font-size: 0.98rem;
+    html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: #2d0005;
+      color: #222;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .contacts-section .gothic-section-title {
+    .overlay {
+      background: transparent;
+      min-height: 100vh;
+      padding-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    /* Theatre Curtain Animation */
+    .curtain {
+      position: fixed;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: #2d0005;
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      transition: none;
+    }
+    .curtain-left, .curtain-right {
+      width: 50vw;
+      height: 100vh;
+      background: linear-gradient(120deg, #3d070e 0%, #7b1122 65%, #2d0005 100%);
+      transition: transform 2s cubic-bezier(.77,0,.18,1);
+      will-change: transform;
+    }
+    .curtain-left {
+      border-right: 2px solid #a80020;
+      transform: translateX(0);
+      border-top-right-radius: 30vw 20vh;
+      border-bottom-right-radius: 18vw 9vh;
+      box-shadow: 20px 0 60px #2d0005;
+    }
+    .curtain-right {
+      border-left: 2px solid #a80020;
+      transform: translateX(0);
+      border-top-left-radius: 30vw 20vh;
+      border-bottom-left-radius: 18vw 9vh;
+      box-shadow: -20px 0 60px #2d0005;
+    }
+    body.curtain-opened .curtain-left {
+      transform: translateX(-100vw);
+    }
+    body.curtain-opened .curtain-right {
+      transform: translateX(100vw);
+    }
+    .curtain-center {
+      position: absolute;
+      top: 47%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 2.2rem;
+      font-family: 'UnifrakturCook', cursive;
+      z-index: 2;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 18px #610707, 1px 1px 0 #fff4;
+      pointer-events: none;
+    }
+    body.curtain-opened .curtain-center {
+      opacity: 0;
+      transition: opacity 0.6s 1s;
+    }
+    /* Header with handwriting and feather */
+    .pencil-title-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-top: 60px;
       margin-bottom: 10px;
-      font-size: 1.3rem;
     }
-    .social-icons {
-      gap: 14px;
-      margin-bottom: 8px;
+    .pencil-title {
+      font-family: 'Caveat', cursive;
+      font-size: 3.5rem;
+      color: #222;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      margin-right: 18px;
+      position: relative;
+      text-shadow: 0 3px 4px #e2e2e2, 1px 1px 0 #bbb;
+      white-space: nowrap;
     }
-    .social-icons a {
-      width: 38px;
-      height: 38px;
-      font-size: 1.5rem;
-    }
-    .other-sites {
-      margin-top: 8px;
-      font-size: 0.95rem;
-    }
-    .contact-form {
-      margin: 18px auto 0 auto;
-      max-width: 330px;
-      padding: 12px 6px 12px 6px;
-      border-radius: 8px;
-      font-size:0.96rem;
-      border: 1.5px solid #8b0000;
-    }
-    .contact-form label {
-      margin-bottom: 4px;
-      font-size: 1rem;
-    }
-    .contact-form input, .contact-form textarea {
-      padding: 6px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      font-size: 0.99rem;
-    }
-    .contact-form button {
-      padding: 7px 18px;
-      font-size: 1rem;
-      margin-top: 5px;
-    }
-    .form-success, .form-error {
-      font-size: 1rem;
+    .feather-img {
+      width: 70px;
+      height: auto;
       margin-bottom: 6px;
+      margin-left: -18px;
+      transform: rotate(-65deg) scaleX(-1);
+      filter: drop-shadow(1px 5px 7px #0002);
     }
-    /* --- End Contact Section Smaller --- */
-
-    /* --- Film Section Styles --- */
-    .film-section {
-      background: rgba(255,255,255,0.93);
+    .gothic-section-title,
+    .gothic-accent,
+    .gothic-form label,
+    .gothic-form input,
+    .gothic-form textarea,
+    .gothic-form button {
+      font-family: 'UnifrakturCook', cursive !important;
+      color: #8b0000 !important;
+      letter-spacing: 1.3px;
+    }
+    .gothic-accent {
+      font-size: 2rem;
+      color: #8b0000 !important;
+      text-align: center;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
+    }
+    .main-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+    .about-section, .family-tree-section {
+      background: rgba(255,255,255,0.92);
       border-radius: 16px;
       box-shadow: 0 2px 12px #0001;
-      padding: 18px 12px 22px 12px;
-      max-width: 420px;
-      min-width: 240px;
-      margin: 0 10px;
+      padding: 20px;
+      max-width: 380px;
+      min-width: 260px;
       text-align: center;
       position: relative;
     }
-    .film-title {
-      font-family:'UnifrakturCook',cursive;
-      font-size:1.6rem;
-      color:#8b0000;
-      margin-bottom:12px;
-      letter-spacing:1.2px;
-      text-shadow:1px 1px 7px #0002,0 0 6px #fff4;
-    }
-    .film-slider {
-      position: relative;
-      margin: 0 auto 12px auto;
-      width: 100%;
-      max-width: 340px;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .film-main-img {
+    .about-cover {
       width: 100%;
       max-width: 320px;
-      max-height: 220px;
-      border-radius: 10px;
+      border-radius: 12px;
+      cursor: pointer;
       box-shadow: 0 2px 8px #0002;
-      object-fit: contain;
-      cursor: pointer;
-      background: #f3e8e8;
+      transition: transform 0.2s;
+    }
+    .about-cover:hover { transform: scale(1.03);}
+    .about-info {
+      display: none;
+      margin-top: 14px;
+      text-align: left;
+    }
+    .about-section.active .about-info {
+      display: block;
+      animation: fadeIn 0.4s;
+    }
+    .about-section.active .about-cover {
       border: 2px solid #8b0000;
+      box-shadow: 0 0 18px #8b000022;
+    }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .about-section .gothic-accent {
       margin-bottom: 8px;
-      transition: box-shadow 0.18s;
-    }
-    .film-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       font-size: 2rem;
-      background: rgba(255,255,255,0.94);
-      color: #8b0000;
-      border: none;
+    }
+    .about-section .gothic-accent-sub {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1.2rem;
+      color: #8b0000 !important;
+      margin: 10px 0 0 0;
+      text-shadow: 1px 1px 8px #0002;
+    }
+    .family-tree-section .tree-cover {
+      width: 120px;
+      margin: 0 auto 10px auto;
+      border-radius: 100px;
       cursor: pointer;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      box-shadow: 0 2px 7px #8b000033;
-      z-index: 2;
-      transition: background 0.18s;
-    }
-    .film-arrow:hover { background: #f8eddc; }
-    .film-arrow-left { left: -16px; }
-    .film-arrow-right { right: -16px; }
-    .film-desc {
-      background: #f8eddc;
-      border-radius: 6px;
-      color: #8b0000;
-      font-family: 'Caveat', cursive;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-      padding: 3px 8px;
-      min-height: 24px;
-    }
-    .film-upload {
-      margin: 8px 0 4px 0;
-      font-size: 0.98rem;
-    }
-    /* Modal for Enlarged Film Image */
-    .film-modal-bg {
-      position: fixed;
-      left:0;top:0;width:100vw;height:100vh;
-      background:rgba(0,0,0,0.7);
-      z-index:9999;
-      display:none;
-      align-items:center;
-      justify-content:center;
-    }
-    .film-modal-bg.active { display: flex;}
-    .film-modal {
+      border: 2px solid #8b0000;
+      box-shadow: 0 2px 8px #8b000033;
+      transition: transform 0.2s;
       background: #fff;
-      border-radius: 14px;
-      max-width: 98vw;
-      max-height: 92vh;
-      box-shadow: 0 4px 40px #000a;
-      padding: 16px;
+    }
+    .family-tree-content { display: none; padding-top: 16px;}
+    .family-tree-section.active .family-tree-content { display: block;}
+    .family-tree-section .gothic-accent {
+      font-size: 1.5rem;
+    }
+    .family-tree-section .gothic-accent-sub {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1rem;
+      color: #8b0000 !important;
+      margin: 8px 0 0 0;
+      text-shadow: 1px 1px 8px #0002;
+    }
+    /* Gothic Book Timeline */
+    .timeline-section {
+      margin: 40px auto 0 auto;
+      max-width: 1200px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 16px;
+      box-shadow: 0 2px 18px #0001;
+      padding: 30px 18px;
+    }
+    .timeline-title {
+      font-family:'UnifrakturCook',cursive;
+      text-align:center;
+      font-size:2rem;
+      color: #8b0000;
+      margin-bottom: 18px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 10px #0002;
+    }
+    .timeline-grid {
+      display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;
+    }
+    .timeline-book {
+      width: 220px; height: 280px;
+      perspective: 1200px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+    .book-inner {
+      width: 100%; height: 100%;
+      position: relative;
+      transition: transform 0.8s cubic-bezier(.86,0,.07,1);
+      transform-style: preserve-3d;
+    }
+    .timeline-book.open .book-inner {
+      transform: rotateY(-130deg) scale(1.06);
+    }
+    .book-front {
+      position: absolute;
+      width: 100%; height: 100%;
+      background: linear-gradient(110deg, #222 70%, #4b2323 100%);
+      border-radius: 13px 5px 5px 13px;
+      border: 3px solid #610707;
+      box-shadow: 6px 5px 26px #0006, 0 0 0 #fff0 inset;
+      backface-visibility: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position:relative;
-    }
-    .film-modal img {
-      max-width: 80vw;
-      max-height: 70vh;
-      border-radius: 10px;
-      box-shadow: 0 2px 18px #0004;
-      margin-bottom: 12px;
-    }
-    .film-modal .film-desc {
-      font-size: 1.2rem;
-      color: #8b0000;
-      background: #f8eddc;
-      border-radius: 8px;
-      padding: 7px 14px;
-      margin-bottom: 4px;
-      font-family: 'Caveat', cursive;
-    }
-    .film-modal .film-close {
-      position: absolute;
-      top: 10px; right: 12px;
-      background: none;
-      border: none;
-      font-size: 2rem;
-      color: #8b0000;
-      cursor: pointer;
+      justify-content: center;
       z-index: 2;
     }
+    .book-front .book-year {
+      font-family: 'UnifrakturCook', cursive;
+      color: #fff;
+      font-size: 2.3rem;
+      text-shadow: 2px 2px 6px #000a, 1px 1px 0 #fff5;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+    .book-front .book-emboss {
+      font-size: 1.7rem;
+      color: #f1e1b0;
+      text-shadow: 1px 1px 2px #9d8b53, 0 0 10px #fff4;
+      margin-bottom: 0;
+    }
+    .book-back {
+      position: absolute;
+      width: 100%; height: 100%;
+      background: linear-gradient(101deg, #f8eddc 80%, #f4e1b7 100%);
+      border-radius: 13px 5px 5px 13px;
+      border: 3px solid #b5a76c;
+      box-shadow: 4px 2px 22px #0004 inset;
+      backface-visibility: hidden;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 24px 20px 10px 20px;
+      z-index: 1;
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: #3a2d13;
+      overflow-y: auto;
+    }
+    .book-back .year-title {
+      font-family: 'UnifrakturCook', cursive;
+      color: #8b0000;
+      font-size: 1.7rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .book-back .event-info {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      color: #222;
+      margin-top: 5px;
+      white-space: pre-line;
+    }
+    .timeline-book:focus { outline: 3px solid #d56;}
+    .timeline-section .gothic-accent-sub {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1.15rem;
+      color: #8b0000 !important;
+      text-align: center;
+      margin: 16px 0 0 0;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 8px #0002;
+    }
+    /* Contact & Other Sites */
+    .contacts-section {
+      margin: 40px auto 0 auto;
+      max-width: 900px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 30px 18px 14px 18px;
+      text-align: center;
+    }
+    .contacts-section .gothic-section-title {
+      margin-bottom: 12px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 26px;
+      margin-bottom: 10px;
+    }
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 7px #8b000022;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.12s;
+      font-size: 2.1rem;
+      text-decoration: none;
+      margin: 0 2px;
+    }
+    .social-icons a:active {
+      transform: scale(0.97);
+    }
+    /* Color social icon to match their branding */
+    .social-icons a.facebook { color: #1877f3; }
+    .social-icons a.facebook:hover { background: #1877f3; color: #fff; }
+    .social-icons a.instagram { color: #e1306c; }
+    .social-icons a.instagram:hover { background: #e1306c; color: #fff; }
+    .social-icons a.youtube { color: #ff0000; }
+    .social-icons a.youtube:hover { background: #ff0000; color: #fff; }
+    .social-icons a.tiktok { color: #000; }
+    .social-icons a.tiktok:hover { background: #000; color: #fff; }
+    .other-sites { margin-top: 16px; }
+    .other-sites a {
+      margin: 0 10px;
+      color: #8b0000 !important;
+      text-decoration: underline;
+      font-size: 1.1rem;
+      font-family: 'UnifrakturCook', cursive;
+      letter-spacing: 1px;
+    }
+    .contact-form {
+      margin: 36px auto 0 auto;
+      max-width: 470px;
+      background: #f8eddc;
+      padding: 24px 16px 20px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #0001;
+      text-align: left;
+      border: 2px solid #8b0000;
+    }
+    .contact-form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      font-family: 'UnifrakturCook', cursive;
+      color: #8b0000;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 9px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      border: 1.5px solid #8b0000;
+      font-size: 1.05rem;
+      font-family: 'UnifrakturCook', cursive;
+      background: #fff;
+      color: #8b0000;
+      letter-spacing: 1.1px;
+      box-shadow: 0 1px 2px #8b000022;
+      transition: border 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border: 2px solid #610707;
+      outline: none;
+    }
+    .contact-form button {
+      font-family: 'UnifrakturCook', cursive;
+      background: #8b0000;
+      color: #fff !important;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 28px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      box-shadow: 0 2px 8px #8b000033;
+      margin-top: 10px;
+    }
+    .contact-form button:hover { background: #610707; color: #f8eddc !important;}
+    .form-success, .form-error {
+      color: #8b0000;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-family: 'UnifrakturCook', cursive;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+    }
+    .form-error { color: #b00; }
     @media (max-width:900px) {
       .main-grid { flex-direction: column; align-items: center;}
       .timeline-grid { flex-direction: column; gap: 18px;}
-      .film-section { max-width: 98vw;}
     }
     @media (max-width:600px) {
-      .film-section { max-width: 100vw;}
-      .film-main-img { max-width: 98vw;}
-      .film-modal img { max-width: 98vw; }
+      .timeline-book { width: 96vw; max-width: 370px;}
       .pencil-title { font-size: 2rem; }
       .feather-img { width: 38px;}
     }
@@ -226,7 +462,22 @@
     </div>
 
     <div class="main-grid">
-      <!-- Family Tree Section FIRST -->
+      <!-- About Me Section -->
+      <div class="about-section" id="aboutSection">
+        <div class="gothic-accent">About</div>
+        <img src="images/Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+        <div class="about-info" id="aboutInfo">
+          <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
+          <p>
+            My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
+            I love traveling, documenting moments, and growing together with those around me.<br>
+            <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
+          </p>
+        </div>
+        <div class="gothic-accent-sub">Click the image to read more!</div>
+      </div>
+
+      <!-- Family Tree Section -->
       <div class="family-tree-section" id="familyTreeSection">
         <div class="gothic-accent">Family Tree</div>
         <img src="images/Arbore.png" alt="Family Tree" class="tree-cover" id="treeCover">
@@ -253,45 +504,11 @@
         </div>
         <div class="gothic-accent-sub">Click the tree for my family!</div>
       </div>
-
-      <!-- About Me Section SECOND -->
-      <div class="about-section" id="aboutSection">
-        <div class="gothic-accent">About</div>
-        <img src="images/Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
-        <div class="about-info" id="aboutInfo">
-          <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
-          <p>
-            My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
-            I love traveling, documenting moments, and growing together with those around me.<br>
-            <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
-          </p>
-        </div>
-        <div class="gothic-accent-sub">Click the image to read more!</div>
-      </div>
-
-      <!-- FILM SECTION THIRD -->
-      <div class="film-section" id="filmSection">
-        <div class="film-title">Photo Film</div>
-        <div class="film-slider" id="filmSlider">
-          <button class="film-arrow film-arrow-left" id="filmPrev" aria-label="Previous photo" style="display:none;">&#8592;</button>
-          <img class="film-main-img" id="filmMainImg" src="" alt="Film photo" style="display:none;">
-          <div class="film-desc" id="filmDesc"></div>
-          <button class="film-arrow film-arrow-right" id="filmNext" aria-label="Next photo" style="display:none;">&#8594;</button>
-        </div>
-        <div class="film-upload">
-          <label for="filmInput" style="cursor:pointer;">Add photos (max 10):</label>
-          <input type="file" id="filmInput" accept="image/*" multiple style="display:inline;">
-        </div>
-        <div style="color:#8b0000; font-size:0.95rem; margin-top:5px;">
-          <span>Click photo to enlarge and add description.</span>
-        </div>
-      </div>
     </div>
 
     <section class="timeline-section">
       <div class="timeline-title">During the Years 1988 - 2025</div>
       <div class="timeline-grid">
-        <!-- Timeline Books as before -->
         <button class="timeline-book" tabindex="0">
           <div class="book-inner">
             <div class="book-front">
@@ -301,6 +518,7 @@
             <div class="book-back">
               <div class="year-title">1991</div>
                <img src="images/1991.jpg" alt="1991">
+
               <div class="event-info">
                 I was born in 1988, starting my life's journey surrounded by family and love.
               </div>
@@ -386,24 +604,13 @@
         <label for="phone">Phone Number</label>
         <input type="tel" id="phone" required>
         <label for="message">Message</label>
-        <textarea id="message" rows="3" required></textarea>
+        <textarea id="message" rows="4" required></textarea>
         <button type="submit">Send</button>
       </form>
-      <div style="margin-top:10px; color:#8b0000; font-family: 'UnifrakturCook', cursive; letter-spacing: 1px;">
+      <div style="margin-top:14px; color:#8b0000; font-family: 'UnifrakturCook', cursive; letter-spacing: 1px;">
         <b>All messages will be sent to:</b> <span style="color:#8b0000;">mangiuchigeorgiana@gmail.com</span>
       </div>
     </section>
-  </div>
-
-  <!-- Modal for Film Section -->
-  <div class="film-modal-bg" id="filmModalBg" tabindex="-1" aria-modal="true">
-    <div class="film-modal" id="filmModal">
-      <button class="film-close" id="filmModalClose" aria-label="Close">&times;</button>
-      <div class="film-desc" id="filmModalDesc"></div>
-      <img src="" id="filmModalImg" alt="Enlarged film photo">
-      <input type="text" id="filmModalInput" placeholder="Add/edit description..." style="font-size:1rem; border-radius:7px; border:1px solid #8b0000; padding:5px 7px; margin-bottom:7px; width:80%;">
-      <button id="filmModalSave" style="font-size:1rem; border-radius:6px; background:#8b0000; color:#fff; border:none; padding:5px 12px; cursor:pointer;">Save</button>
-    </div>
   </div>
 
   <script>
@@ -452,100 +659,6 @@
       setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
       // For production, connect to Formspree, EmailJS, or your backend.
     }
-
-    // =========================
-    // FILM SECTION FUNCTIONALITY
-    // =========================
-    const filmInput = document.getElementById('filmInput');
-    const filmMainImg = document.getElementById('filmMainImg');
-    const filmDesc = document.getElementById('filmDesc');
-    const filmPrev = document.getElementById('filmPrev');
-    const filmNext = document.getElementById('filmNext');
-    const filmSlider = document.getElementById('filmSlider');
-    const filmModalBg = document.getElementById('filmModalBg');
-    const filmModal = document.getElementById('filmModal');
-    const filmModalImg = document.getElementById('filmModalImg');
-    const filmModalInput = document.getElementById('filmModalInput');
-    const filmModalDesc = document.getElementById('filmModalDesc');
-    const filmModalClose = document.getElementById('filmModalClose');
-    const filmModalSave = document.getElementById('filmModalSave');
-    let filmPhotos = [];
-    let filmIndex = 0;
-
-    // Each photo is { src, desc }
-    filmInput.addEventListener('change', function(e){
-      const files = Array.from(e.target.files).slice(0,10);
-      if (files.length === 0) return;
-      filmPhotos = [];
-      let loaded = 0;
-      files.forEach((file, idx) => {
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-          filmPhotos.push({src: ev.target.result, desc: ''});
-          loaded++;
-          if (loaded === files.length) {
-            filmIndex = 0;
-            showFilmPhoto();
-          }
-        };
-        reader.readAsDataURL(file);
-      });
-    });
-
-    function showFilmPhoto() {
-      if (!filmPhotos.length) {
-        filmMainImg.style.display = 'none';
-        filmDesc.textContent = '';
-        filmPrev.style.display = 'none';
-        filmNext.style.display = 'none';
-        return;
-      }
-      filmMainImg.style.display = 'block';
-      filmMainImg.src = filmPhotos[filmIndex].src;
-      filmDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
-      filmPrev.style.display = filmIndex > 0 ? 'inline-block' : 'none';
-      filmNext.style.display = filmIndex < filmPhotos.length-1 ? 'inline-block' : 'none';
-    }
-    filmPrev.onclick = function() {
-      if (filmIndex > 0) { filmIndex--; showFilmPhoto(); }
-    }
-    filmNext.onclick = function() {
-      if (filmIndex < filmPhotos.length-1) { filmIndex++; showFilmPhoto(); }
-    }
-    filmMainImg.onclick = function() {
-      if (!filmPhotos.length) return;
-      filmModalBg.classList.add('active');
-      filmModalImg.src = filmPhotos[filmIndex].src;
-      filmModalDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
-      filmModalInput.value = filmPhotos[filmIndex].desc || '';
-      filmModalInput.focus();
-    }
-    filmModalClose.onclick = function() {
-      filmModalBg.classList.remove('active');
-    }
-    filmModalBg.onclick = function(e) {
-      if (e.target === filmModalBg) filmModalBg.classList.remove('active');
-    }
-    filmModalSave.onclick = function() {
-      if (!filmPhotos.length) return;
-      filmPhotos[filmIndex].desc = filmModalInput.value;
-      filmDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
-      filmModalDesc.textContent = filmPhotos[filmIndex].desc || '(No description)';
-      filmModalBg.classList.remove('active');
-    }
-    filmModalInput.addEventListener('keydown', function(e){
-      if (e.key === 'Enter') { filmModalSave.click(); }
-    });
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (!filmPhotos.length) return;
-      if (filmModalBg.classList.contains('active')) {
-        if (e.key === 'Escape') filmModalBg.classList.remove('active');
-      } else {
-        if (e.key === 'ArrowLeft') { if (filmIndex>0) {filmIndex--; showFilmPhoto();}}
-        if (e.key === 'ArrowRight') { if (filmIndex<filmPhotos.length-1) {filmIndex++; showFilmPhoto();}}
-      }
-    });
   </script>
 </body>
 </html>
