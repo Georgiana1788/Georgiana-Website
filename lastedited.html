@@ -362,61 +362,407 @@
   </style>
 </head>
 <body>
-<div class="overlay">
-
-  <!-- Header: Handwriting + Feather -->
-  <div class="pencil-title-container">
-    <span class="pencil-title">Georgiana Mangiuchi</span>
-    <img class="feather-img" src="https://pngimg.com/uploads/feather/feather_PNG12981.png" alt="Feather writing">
+ <style>
+    /* ... ALL YOUR CSS UNCHANGED ... */
+    /* The only additions are the .photo-film-section and related classes below */
+    .photo-film-section {
+      background: rgba(255,255,255,0.92);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 20px;
+      max-width: 380px;
+      min-width: 260px;
+      text-align: center;
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .photo-film-title {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 2rem;
+      color: #8b0000;
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
+    }
+    .photo-film-viewer {
+      flex: 1 1 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .photo-film-img-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 8px;
+      min-height: 180px;
+    }
+    .photo-film-img {
+      width: 120px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #0002;
+      border: 2px solid #8b0000;
+      cursor: pointer;
+      margin: 0 12px;
+      background: #eee;
+      transition: box-shadow 0.2s;
+    }
+    .photo-film-arrow {
+      background: #f8eddc;
+      color: #8b0000;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      box-shadow: 0 2px 7px #8b000033;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-film-arrow:disabled { opacity: 0.4; cursor: default; }
+    .photo-film-info {
+      font-size: 1rem;
+      color: #8b0000;
+      margin-bottom: 4px;
+      font-family: 'Caveat', cursive;
+      background: #f8eddc;
+      border-radius: 6px;
+      padding: 3px 8px;
+      min-height: 24px;
+      width: 95%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .photo-film-upload {
+      margin-top: 12px;
+      font-size: 0.97rem;
+      color: #8b0000;
+      width: 100%;
+      text-align: center;
+    }
+    .photo-film-upload input[type="file"] {
+      margin-top: 6px;
+    }
+    /* Modal for enlarged photo */
+    .photo-film-modal-bg {
+      position: fixed;
+      left:0;top:0;width:100vw;height:100vh;
+      background:rgba(0,0,0,0.7);
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+    }
+    .photo-film-modal-bg.active { display: flex;}
+    .photo-film-modal {
+      background: #fff;
+      border-radius: 14px;
+      max-width: 98vw;
+      max-height: 92vh;
+      box-shadow: 0 4px 40px #000a;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position:relative;
+      min-width: 260px;
+    }
+    .photo-film-modal img {
+      max-width: 240px;
+      max-height: 58vh;
+      border-radius: 10px;
+      box-shadow: 0 2px 18px #0004;
+      margin-bottom: 8px;
+    }
+    .photo-film-modal .photo-film-info {
+      font-size: 1.16rem;
+      margin-bottom: 8px;
+      background: #f8eddc;
+      border-radius: 8px;
+      padding: 7px 14px;
+      width: 90%;
+      max-width: 350px;
+    }
+    .photo-film-modal .photo-film-close {
+      position: absolute;
+      top: 10px; right: 12px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #8b0000;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .photo-film-modal input[type="text"] {
+      margin-bottom: 4px;
+      width: 90%;
+      font-family:'Caveat',cursive;
+      font-size:1rem;
+      border-radius:6px;
+      border:1px solid #8b0000;
+      padding:4px 7px;
+    }
+    .photo-film-modal button {
+      font-size:1rem; border-radius:6px; background:#8b0000; color:#fff; border:none; padding:5px 12px; cursor:pointer;font-family:'UnifrakturCook',cursive;
+    }
+    /* ... rest of your original CSS ... */
+  </style>
+</head>
+<body>
+  <!-- Curtain effect on load -->
+  <div class="curtain" id="curtain">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+    <div class="curtain-center">Welcome</div>
   </div>
 
-  <div class="main-grid">
-    <!-- About Me Section -->
-    <div class="about-section" id="aboutSection">
-      <div class="gothic-accent">About</div>
-      <img src="desktop/about-cover.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
-      <div class="about-info" id="aboutInfo">
-        <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
-        <p>
-          <!-- Write about yourself here! Example: -->
-          My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
-          I love traveling, documenting moments, and growing together with those around me.<br>
-          <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
-        </p>
-      </div>
-      <div class="gothic-accent-sub">Click the image to read more!</div>
+  <div class="overlay">
+    <!-- Header: Handwriting + Feather -->
+    <div class="pencil-title-container">
+      <span class="pencil-title">Georgiana Mangiuchi</span>
+      <img class="feather-img" src="https://pngimg.com/uploads/feather/feather_PNG12981.png" alt="Feather writing">
     </div>
 
-    <!-- Family Tree Section -->
-    <div class="family-tree-section" id="familyTreeSection">
-      <div class="gothic-accent">Family Tree</div>
-      <img src="desktop/green-tree.jpg" alt="Family Tree" class="tree-cover" id="treeCover">
-      <div class="family-tree-content" id="treeContent">
-        <!-- Schematic family tree. You can expand or redesign! -->
-        <div style="text-align:left; margin:18px auto; max-width:280px;">
-          <strong>Grandparents</strong>
-          <ul>
-            <li>Ion Popescu + Maria Popescu</li>
-            <li>Vasile Ionescu + Elena Ionescu</li>
-          </ul>
-          <strong>Parents</strong>
-          <ul>
-            <li>Florin Mangiuchi + Ana Mangiuchi</li>
-          </ul>
-          <strong>Me</strong>
-          <ul>
-            <li>Georgiana Mangiuchi</li>
-          </ul>
-          <strong>Siblings</strong>
-          <ul>
-            <li>Alexandru Mangiuchi</li>
-          </ul>
+    <div class="main-grid">
+      <!-- About Me Section -->
+      <div class="about-section" id="aboutSection">
+        <div class="gothic-accent">About</div>
+        <img src="images/Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
+        <div class="about-info" id="aboutInfo">
+          <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
+          <p>
+            My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
+            I love traveling, documenting moments, and growing together with those around me.<br>
+            <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
+          </p>
+        </div>
+        <div class="gothic-accent-sub">Click the image to read more!</div>
+      </div>
+
+      <!-- Family Tree Section -->
+      <div class="family-tree-section" id="familyTreeSection">
+        <div class="gothic-accent">Family Tree</div>
+        <img src="images/Arbore.png" alt="Family Tree" class="tree-cover" id="treeCover">
+        <div class="family-tree-content" id="treeContent">
+          <div style="text-align:left; margin:18px auto; max-width:280px;">
+            <strong>Grandparents</strong>
+            <ul>
+              <li>Mangiuchi Gheorghe + Geacă Maria</li>
+              <li>Buicli Dumitru + Samara Maria</li>
+            </ul>
+            <strong>Parents</strong>
+            <ul>
+              <li>Mangiuchi Ionel + Buicli Tanța</li>
+            </ul>
+            <strong>Me</strong>
+            <ul>
+              <li>Georgiana Mangiuchi</li>
+            </ul>
+            <strong>Siblings</strong>
+            <ul>
+              <li>Maria-Grațiela Mangiuchi</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gothic-accent-sub">Click the tree for my family!</div>
+      </div>
+
+      <!-- Photo Film Section -->
+      <div class="photo-film-section" id="photoFilmSection">
+        <div class="photo-film-title gothic-accent">Photo Roll</div>
+        <div class="photo-film-viewer" id="photoFilmViewer">
+          <div class="photo-film-img-container">
+            <button class="photo-film-arrow" id="photoPrev" aria-label="Previous photo" disabled>&#8592;</button>
+            <img class="photo-film-img" id="photoFilmImg" src="" alt="Film photo" style="display:none;">
+            <button class="photo-film-arrow" id="photoNext" aria-label="Next photo" disabled>&#8594;</button>
+          </div>
+          <div class="photo-film-info" id="photoFilmInfo"></div>
+        </div>
+        <div class="photo-film-upload">
+          <label for="photoFilmInput" style="cursor:pointer;">Add photos (max 10):</label>
+          <input type="file" id="photoFilmInput" accept="image/*" multiple>
+        </div>
+        <div style="color:#8b0000; font-size:0.92rem; margin-top:5px;">
+          <span>Click photo to enlarge and add info about year and place.</span>
         </div>
       </div>
-      <div class="gothic-accent-sub">Click the tree for my family!</div>
+    </div>
+    <!-- ...timeline, contact, etc. unchanged... -->
+
+    <!-- Modal for Photo Film -->
+    <div class="photo-film-modal-bg" id="photoFilmModalBg" tabindex="-1" aria-modal="true">
+      <div class="photo-film-modal" id="photoFilmModal">
+        <button class="photo-film-close" id="photoFilmModalClose" aria-label="Close">&times;</button>
+        <img src="" id="photoFilmModalImg" alt="Enlarged photo">
+        <div class="photo-film-info" id="photoFilmModalInfo"></div>
+        <input type="text" id="photoFilmModalYear" placeholder="Year (e.g. 2024)">
+        <input type="text" id="photoFilmModalDesc" placeholder="Place / Description...">
+        <button id="photoFilmModalSave">Save</button>
+      </div>
     </div>
   </div>
+  <script>
+    // Curtain animation
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.body.classList.add('curtain-opened');
+        setTimeout(() => {
+          document.getElementById('curtain').style.display = 'none';
+        }, 2400);
+      }, 400);
+    });
+    // About Me toggle
+    document.getElementById('aboutCover').onclick = function() {
+      document.getElementById('aboutSection').classList.toggle('active');
+    };
+    // Family Tree toggle
+    document.getElementById('treeCover').onclick = function() {
+      document.getElementById('familyTreeSection').classList.toggle('active');
+    };
+    // Timeline Book Open/Close (only one open at a time)
+    document.querySelectorAll('.timeline-book').forEach((book, idx, allBooks) => {
+      book.addEventListener('click', function(e) {
+        if(this.classList.contains('open')) {
+          this.classList.remove('open');
+          return;
+        }
+        allBooks.forEach(b=>b.classList.remove('open'));
+        this.classList.add('open');
+      });
+      book.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
 
+    // Contact Form (demo only)
+    document.getElementById('contactForm').onsubmit = async function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').textContent = "Thank you! Your message was sent.";
+      document.getElementById('formSuccess').style.display = "block";
+      document.getElementById('formError').style.display = "none";
+      this.reset();
+      setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
+    }
+
+    // ===== Photo Roll Logic =====
+    const photoFilmInput = document.getElementById('photoFilmInput');
+    const photoFilmImg = document.getElementById('photoFilmImg');
+    const photoPrev = document.getElementById('photoPrev');
+    const photoNext = document.getElementById('photoNext');
+    const photoFilmInfo = document.getElementById('photoFilmInfo');
+    const photoFilmModalBg = document.getElementById('photoFilmModalBg');
+    const photoFilmModal = document.getElementById('photoFilmModal');
+    const photoFilmModalImg = document.getElementById('photoFilmModalImg');
+    const photoFilmModalInfo = document.getElementById('photoFilmModalInfo');
+    const photoFilmModalClose = document.getElementById('photoFilmModalClose');
+    const photoFilmModalYear = document.getElementById('photoFilmModalYear');
+    const photoFilmModalDesc = document.getElementById('photoFilmModalDesc');
+    const photoFilmModalSave = document.getElementById('photoFilmModalSave');
+
+    let photoFilmPhotos = [];
+    let photoFilmIndex = 0;
+
+    photoFilmInput.addEventListener('change', function(e){
+      const files = Array.from(e.target.files).slice(0,10);
+      if (files.length === 0) return;
+      photoFilmPhotos = [];
+      let loaded = 0;
+      files.forEach((file, idx) => {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          photoFilmPhotos.push({src: ev.target.result, year: '', desc: ''});
+          loaded++;
+          if (loaded === files.length) {
+            photoFilmIndex = 0;
+            showPhotoFilm();
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    function showPhotoFilm() {
+      if (!photoFilmPhotos.length) {
+        photoFilmImg.style.display = 'none';
+        photoFilmInfo.textContent = '';
+        photoPrev.disabled = true;
+        photoNext.disabled = true;
+        return;
+      }
+      photoFilmImg.style.display = 'block';
+      photoFilmImg.src = photoFilmPhotos[photoFilmIndex].src;
+      let year = photoFilmPhotos[photoFilmIndex].year?.trim();
+      let desc = photoFilmPhotos[photoFilmIndex].desc?.trim();
+      photoFilmInfo.textContent = (year? year : '') + (desc? (" • " + desc) : (!year && !desc ? "(No info)" : ""));
+      photoPrev.disabled = (photoFilmIndex === 0);
+      photoNext.disabled = (photoFilmIndex === photoFilmPhotos.length-1);
+    }
+    photoPrev.onclick = function() {
+      if (photoFilmIndex > 0) { photoFilmIndex--; showPhotoFilm(); }
+    }
+    photoNext.onclick = function() {
+      if (photoFilmIndex < photoFilmPhotos.length-1) { photoFilmIndex++; showPhotoFilm(); }
+    }
+
+    photoFilmImg.onclick = function() {
+      if (!photoFilmPhotos.length) return;
+      photoFilmModalBg.classList.add('active');
+      photoFilmModalImg.src = photoFilmPhotos[photoFilmIndex].src;
+      let year = photoFilmPhotos[photoFilmIndex].year?.trim();
+      let desc = photoFilmPhotos[photoFilmIndex].desc?.trim();
+      photoFilmModalInfo.textContent = (year? year : '') + (desc? (" • " + desc) : (!year && !desc ? "(No info)" : ""));
+      photoFilmModalYear.value = year || '';
+      photoFilmModalDesc.value = desc || '';
+    }
+    photoFilmModalClose.onclick = function() {
+      photoFilmModalBg.classList.remove('active');
+    }
+    photoFilmModalBg.onclick = function(e) {
+      if (e.target === photoFilmModalBg) photoFilmModalBg.classList.remove('active');
+    }
+    photoFilmModalSave.onclick = function() {
+      if (!photoFilmPhotos.length) return;
+      let newYear = photoFilmModalYear.value;
+      let newDesc = photoFilmModalDesc.value;
+      photoFilmPhotos[photoFilmIndex].year = newYear;
+      photoFilmPhotos[photoFilmIndex].desc = newDesc;
+      showPhotoFilm();
+      let year = newYear?.trim();
+      let desc = newDesc?.trim();
+      photoFilmModalInfo.textContent = (year? year : '') + (desc? (" • " + desc) : (!year && !desc ? "(No info)" : ""));
+      photoFilmModalBg.classList.remove('active');
+    }
+    document.addEventListener('keydown', function(e) {
+      if (!photoFilmPhotos.length) return;
+      if (photoFilmModalBg.classList.contains('active')) {
+        if (e.key === 'Escape') photoFilmModalBg.classList.remove('active');
+      } else {
+        if (e.key === 'ArrowLeft') { if (photoFilmIndex>0) {photoFilmIndex--; showPhotoFilm();}}
+        if (e.key === 'ArrowRight') { if (photoFilmIndex<photoFilmPhotos.length-1) {photoFilmIndex++; showPhotoFilm();}}
+      }
+    });
+    photoFilmModalYear.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
+    photoFilmModalDesc.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
+
+    // Initial state
+    showPhotoFilm();
+  </script>
   <!-- Timeline Section -->
   <section class="timeline-section">
     <div class="timeline-title">During the Years 1988 - 2025</div>
