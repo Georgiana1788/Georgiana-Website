@@ -4,62 +4,166 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Georgiana Mangiuchi</title>
-  <!-- Gothic and Handwriting Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
-  <!-- Font Awesome for Social Icons (brands) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    /* ... ALL YOUR CSS UNCHANGED ... */
-    /* The only additions are the .photo-film-section and related classes below */
-    .photo-film-section {
-      background: rgba(255,255,255,0.92);
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #0001;
-      padding: 20px;
-      max-width: 380px;
-      min-width: 260px;
-      text-align: center;
-      position: relative;
-      min-height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+    html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: #2d0005;
+      color: #222;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .photo-film-title {
-      font-family: 'UnifrakturCook', cursive;
+    .overlay {
+      background: transparent;
+      min-height: 100vh;
+      padding-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    /* Curtain effect styles unchanged ... */
+    .curtain { /* ... */ }
+    .curtain-left, .curtain-right { /* ... */ }
+    .curtain-left { /* ... */ }
+    .curtain-right { /* ... */ }
+    body.curtain-opened .curtain-left { /* ... */ }
+    body.curtain-opened .curtain-right { /* ... */ }
+    .curtain-center { /* ... */ }
+    body.curtain-opened .curtain-center { /* ... */ }
+
+    .pencil-title-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-top: 60px;
+      margin-bottom: 10px;
+    }
+    .pencil-title {
+      font-family: 'Caveat', cursive;
+      font-size: 3.5rem;
+      color: #222;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      margin-right: 18px;
+      position: relative;
+      text-shadow: 0 3px 4px #e2e2e2, 1px 1px 0 #bbb;
+      white-space: nowrap;
+    }
+    .feather-img {
+      width: 70px;
+      height: auto;
+      margin-bottom: 6px;
+      margin-left: -18px;
+      transform: rotate(-65deg) scaleX(-1);
+      filter: drop-shadow(1px 5px 7px #0002);
+    }
+    .gothic-section-title,
+    .gothic-accent,
+    .gothic-form label,
+    .gothic-form input,
+    .gothic-form textarea,
+    .gothic-form button {
+      font-family: 'UnifrakturCook', cursive !important;
+      color: #8b0000 !important;
+      letter-spacing: 1.3px;
+    }
+    .gothic-accent {
       font-size: 2rem;
-      color: #8b0000;
+      color: #8b0000 !important;
       text-align: center;
-      margin-bottom: 8px;
+      margin: 0;
       letter-spacing: 2px;
       text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
     }
-    .photo-film-viewer {
-      flex: 1 1 auto;
-      width: 100%;
+    /* SMALLER main grid with 3 boxes side by side */
+    .main-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 24px 0 0 0;
+      flex-wrap: wrap;
+    }
+    .about-section, .family-tree-section, .photo-film-section {
+      background: rgba(255,255,255,0.92);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0001;
+      padding: 15px 10px 18px 10px;
+      width: 260px;
+      min-width: 200px;
+      max-width: 260px;
+      text-align: center;
+      position: relative;
+      min-height: 340px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
     }
+    .about-cover, .photo-film-img {
+      width: 100%;
+      max-width: 180px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #0002;
+      transition: transform 0.2s;
+      margin-bottom: 10px;
+    }
+    .about-cover:hover, .photo-film-img:hover { transform: scale(1.03);}
+    .about-info {
+      display: none;
+      margin-top: 10px;
+      text-align: left;
+      font-size: 0.96em;
+    }
+    .about-section.active .about-info {
+      display: block;
+      animation: fadeIn 0.4s;
+    }
+    .about-section.active .about-cover {
+      border: 2px solid #8b0000;
+      box-shadow: 0 0 18px #8b000022;
+    }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .about-section .gothic-accent { margin-bottom: 7px; font-size: 1.4rem; }
+    .about-section .gothic-accent-sub { font-size: 1rem; margin-top: 8px;}
+    .family-tree-section .tree-cover {
+      width: 70px;
+      margin: 0 auto 8px auto;
+      border-radius: 100px;
+      cursor: pointer;
+      border: 2px solid #8b0000;
+      box-shadow: 0 2px 8px #8b000033;
+      background: #fff;
+      transition: transform 0.2s;
+    }
+    .family-tree-content { display: none; padding-top: 10px; font-size:0.96em;}
+    .family-tree-section.active .family-tree-content { display: block;}
+    .family-tree-section .gothic-accent { font-size: 1.2rem;}
+    .family-tree-section .gothic-accent-sub { font-size: 0.92rem; margin:7px 0 0 0;}
+    /* Photo Film Section */
+    .photo-film-title { font-size: 1.35rem; margin-bottom: 10px;}
     .photo-film-img-container {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       margin-bottom: 8px;
-      min-height: 180px;
+      min-height: 100px;
     }
     .photo-film-img {
-      width: 120px;
-      height: 170px;
+      width: 80px;
+      height: 110px;
       object-fit: cover;
       border-radius: 8px;
       box-shadow: 0 2px 8px #0002;
       border: 2px solid #8b0000;
       cursor: pointer;
-      margin: 0 12px;
+      margin: 0 8px;
       background: #eee;
       transition: box-shadow 0.2s;
     }
@@ -68,9 +172,9 @@
       color: #8b0000;
       border: none;
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      font-size: 1.3rem;
+      width: 24px;
+      height: 24px;
+      font-size: 1rem;
       box-shadow: 0 2px 7px #8b000033;
       cursor: pointer;
       transition: background 0.15s;
@@ -80,28 +184,20 @@
     }
     .photo-film-arrow:disabled { opacity: 0.4; cursor: default; }
     .photo-film-info {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #8b0000;
       margin-bottom: 4px;
       font-family: 'Caveat', cursive;
       background: #f8eddc;
       border-radius: 6px;
-      padding: 3px 8px;
-      min-height: 24px;
+      padding: 2px 8px;
+      min-height: 20px;
       width: 95%;
       box-sizing: border-box;
       text-align: center;
     }
-    .photo-film-upload {
-      margin-top: 12px;
-      font-size: 0.97rem;
-      color: #8b0000;
-      width: 100%;
-      text-align: center;
-    }
-    .photo-film-upload input[type="file"] {
-      margin-top: 6px;
-    }
+    .photo-film-upload { margin-top: 9px; font-size: 0.95rem; color: #8b0000; width: 100%; text-align: center;}
+    .photo-film-upload input[type="file"] { margin-top: 3px;}
     /* Modal for enlarged photo */
     .photo-film-modal-bg {
       position: fixed;
@@ -116,38 +212,38 @@
     .photo-film-modal {
       background: #fff;
       border-radius: 14px;
-      max-width: 98vw;
-      max-height: 92vh;
+      max-width: 95vw;
+      max-height: 90vh;
       box-shadow: 0 4px 40px #000a;
-      padding: 16px;
+      padding: 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position:relative;
-      min-width: 260px;
+      min-width: 180px;
     }
     .photo-film-modal img {
-      max-width: 240px;
-      max-height: 58vh;
+      max-width: 150px;
+      max-height: 60vh;
       border-radius: 10px;
       box-shadow: 0 2px 18px #0004;
       margin-bottom: 8px;
     }
     .photo-film-modal .photo-film-info {
-      font-size: 1.16rem;
+      font-size: 1rem;
       margin-bottom: 8px;
       background: #f8eddc;
       border-radius: 8px;
-      padding: 7px 14px;
+      padding: 5px 10px;
       width: 90%;
-      max-width: 350px;
+      max-width: 200px;
     }
     .photo-film-modal .photo-film-close {
       position: absolute;
-      top: 10px; right: 12px;
+      top: 7px; right: 12px;
       background: none;
       border: none;
-      font-size: 2rem;
+      font-size: 1.4rem;
       color: #8b0000;
       cursor: pointer;
       z-index: 2;
@@ -156,15 +252,60 @@
       margin-bottom: 4px;
       width: 90%;
       font-family:'Caveat',cursive;
-      font-size:1rem;
+      font-size:0.95rem;
       border-radius:6px;
       border:1px solid #8b0000;
       padding:4px 7px;
     }
     .photo-film-modal button {
-      font-size:1rem; border-radius:6px; background:#8b0000; color:#fff; border:none; padding:5px 12px; cursor:pointer;font-family:'UnifrakturCook',cursive;
+      font-size:0.98rem; border-radius:6px; background:#8b0000; color:#fff; border:none; padding:5px 12px; cursor:pointer;font-family:'UnifrakturCook',cursive;
     }
-    /* ... rest of your original CSS ... */
+    /* Contact section smaller */
+    .contacts-section {
+      margin: 30px auto 0 auto;
+      max-width: 420px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 2px 10px #0001;
+      padding: 10px 8px 10px 8px;
+      text-align: center;
+      font-size: 0.97rem;
+    }
+    .contacts-section .gothic-section-title {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+    .social-icons {
+      gap: 13px;
+      margin-bottom: 8px;
+    }
+    .social-icons a {
+      width: 31px;
+      height: 31px;
+      font-size: 1.1rem;
+    }
+    .other-sites { margin-top: 6px; font-size: 0.95rem;}
+    .contact-form {
+      margin: 10px auto 0 auto;
+      max-width: 250px;
+      padding: 7px 6px 9px 6px;
+      border-radius: 8px;
+      font-size:0.93rem;
+      border: 1.5px solid #8b0000;
+    }
+    .contact-form label { margin-bottom: 3px; font-size: 0.97rem;}
+    .contact-form input, .contact-form textarea {
+      padding: 5px;
+      margin-bottom: 7px;
+      border-radius: 6px;
+      font-size: 0.97rem;
+    }
+    .contact-form button { padding: 6px 14px; font-size: 0.98rem; margin-top: 5px;}
+    .form-success, .form-error { font-size: 0.97rem; margin-bottom: 5px;}
+    @media (max-width:900px) {
+      .main-grid { flex-direction: column; align-items: center; gap: 16px;}
+      .about-section, .family-tree-section, .photo-film-section { width: 97vw; max-width: 370px; min-width: unset;}
+    }
   </style>
 </head>
 <body>
@@ -174,22 +315,19 @@
     <div class="curtain-right"></div>
     <div class="curtain-center">Welcome</div>
   </div>
-
   <div class="overlay">
-    <!-- Header: Handwriting + Feather -->
     <div class="pencil-title-container">
       <span class="pencil-title">Georgiana Mangiuchi</span>
       <img class="feather-img" src="https://pngimg.com/uploads/feather/feather_PNG12981.png" alt="Feather writing">
     </div>
-
     <div class="main-grid">
       <!-- About Me Section -->
       <div class="about-section" id="aboutSection">
         <div class="gothic-accent">About</div>
         <img src="images/Aboutme.jpg" alt="About Georgiana" class="about-cover" id="aboutCover">
         <div class="about-info" id="aboutInfo">
-          <h2 class="gothic-accent" style="font-size:1.5rem;">About Me</h2>
-          <p>
+          <h2 class="gothic-accent" style="font-size:1.2rem;">About Me</h2>
+          <p style="font-size:0.98em;">
             My name is Georgiana Mangiuchi. I was born in 1988 and I have always been passionate about art, family, and lifelong learning.<br>
             I love traveling, documenting moments, and growing together with those around me.<br>
             <b>This section can be filled with your story, hobbies, achievements, and anything you want the world to know!</b>
@@ -197,13 +335,12 @@
         </div>
         <div class="gothic-accent-sub">Click the image to read more!</div>
       </div>
-
       <!-- Family Tree Section -->
       <div class="family-tree-section" id="familyTreeSection">
         <div class="gothic-accent">Family Tree</div>
         <img src="images/Arbore.png" alt="Family Tree" class="tree-cover" id="treeCover">
         <div class="family-tree-content" id="treeContent">
-          <div style="text-align:left; margin:18px auto; max-width:280px;">
+          <div style="text-align:left; margin:10px auto; max-width:180px;font-size:0.97em;">
             <strong>Grandparents</strong>
             <ul>
               <li>Mangiuchi Gheorghe + Geacă Maria</li>
@@ -225,7 +362,6 @@
         </div>
         <div class="gothic-accent-sub">Click the tree for my family!</div>
       </div>
-
       <!-- Photo Film Section -->
       <div class="photo-film-section" id="photoFilmSection">
         <div class="photo-film-title gothic-accent">Photo Roll</div>
@@ -246,9 +382,13 @@
         </div>
       </div>
     </div>
-    <!-- ...timeline, contact, etc. unchanged... -->
-
-    <!-- Modal for Photo Film -->
+    <!-- Timeline and contacts as in your original code, UNCHANGED -->
+    <section class="timeline-section">
+      <!-- ... Timeline as before ... -->
+    </section>
+    <section class="contacts-section">
+      <!-- ... Contact form and socials as before ... -->
+    </section>
     <div class="photo-film-modal-bg" id="photoFilmModalBg" tabindex="-1" aria-modal="true">
       <div class="photo-film-modal" id="photoFilmModal">
         <button class="photo-film-close" id="photoFilmModalClose" aria-label="Close">&times;</button>
@@ -295,7 +435,6 @@
         }
       });
     });
-
     // Contact Form (demo only)
     document.getElementById('contactForm').onsubmit = async function(e) {
       e.preventDefault();
@@ -305,7 +444,6 @@
       this.reset();
       setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
     }
-
     // ===== Photo Roll Logic =====
     const photoFilmInput = document.getElementById('photoFilmInput');
     const photoFilmImg = document.getElementById('photoFilmImg');
@@ -320,10 +458,8 @@
     const photoFilmModalYear = document.getElementById('photoFilmModalYear');
     const photoFilmModalDesc = document.getElementById('photoFilmModalDesc');
     const photoFilmModalSave = document.getElementById('photoFilmModalSave');
-
     let photoFilmPhotos = [];
     let photoFilmIndex = 0;
-
     photoFilmInput.addEventListener('change', function(e){
       const files = Array.from(e.target.files).slice(0,10);
       if (files.length === 0) return;
@@ -342,7 +478,6 @@
         reader.readAsDataURL(file);
       });
     });
-
     function showPhotoFilm() {
       if (!photoFilmPhotos.length) {
         photoFilmImg.style.display = 'none';
@@ -365,7 +500,6 @@
     photoNext.onclick = function() {
       if (photoFilmIndex < photoFilmPhotos.length-1) { photoFilmIndex++; showPhotoFilm(); }
     }
-
     photoFilmImg.onclick = function() {
       if (!photoFilmPhotos.length) return;
       photoFilmModalBg.classList.add('active');
@@ -405,8 +539,6 @@
     });
     photoFilmModalYear.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
     photoFilmModalDesc.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
-
-    // Initial state
     showPhotoFilm();
   </script>
 </body>
