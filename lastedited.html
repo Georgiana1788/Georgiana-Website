@@ -8,7 +8,62 @@
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* ... All your current CSS ... */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #2d0005;
+      min-height: 100vh;
+      color: #222;
+    }
+    .overlay {
+      background: rgba(255,255,255,0.84);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+    .pencil-title-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-top: 60px;
+      margin-bottom: 10px;
+    }
+    .pencil-title {
+      font-family: 'Caveat', cursive;
+      font-size: 3.5rem;
+      color: #222;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      margin-right: 18px;
+      position: relative;
+      text-shadow: 0 3px 4px #e2e2e2, 1px 1px 0 #bbb;
+      white-space: nowrap;
+    }
+    .feather-img {
+      width: 70px;
+      height: auto;
+      margin-bottom: 6px;
+      margin-left: -18px;
+      transform: rotate(-65deg) scaleX(-1);
+      filter: drop-shadow(1px 5px 7px #0002);
+    }
+    .gothic-section-title,
+    .gothic-accent,
+    .gothic-form label,
+    .gothic-form input,
+    .gothic-form textarea,
+    .gothic-form button {
+      font-family: 'UnifrakturCook', cursive !important;
+      color: #8b0000 !important;
+      letter-spacing: 1.3px;
+    }
+    .gothic-accent {
+      font-size: 2rem;
+      color: #8b0000 !important;
+      text-align: center;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 7px #0002, 0 0 6px #fff4;
+    }
     .main-grid {
       display: flex;
       gap: 24px;
@@ -26,6 +81,62 @@
       min-width: 260px;
       text-align: center;
       position: relative;
+    }
+    .about-cover {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #0002;
+      transition: transform 0.2s;
+    }
+    .about-cover:hover { transform: scale(1.03);}
+    .about-info {
+      display: none;
+      margin-top: 14px;
+      text-align: left;
+    }
+    .about-section.active .about-info {
+      display: block;
+      animation: fadeIn 0.4s;
+    }
+    .about-section.active .about-cover {
+      border: 2px solid #8b0000;
+      box-shadow: 0 0 18px #8b000022;
+    }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .about-section .gothic-accent {
+      margin-bottom: 8px;
+      font-size: 2rem;
+    }
+    .about-section .gothic-accent-sub {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1.2rem;
+      color: #8b0000 !important;
+      margin: 10px 0 0 0;
+      text-shadow: 1px 1px 8px #0002;
+    }
+    .family-tree-section .tree-cover {
+      width: 120px;
+      margin: 0 auto 10px auto;
+      border-radius: 100px;
+      cursor: pointer;
+      border: 2px solid #8b0000;
+      box-shadow: 0 2px 8px #8b000033;
+      transition: transform 0.2s;
+      background: #fff;
+    }
+    .family-tree-content { display: none; padding-top: 16px;}
+    .family-tree-section.active .family-tree-content { display: block;}
+    .family-tree-section .gothic-accent {
+      font-size: 1.5rem;
+    }
+    .family-tree-section .gothic-accent-sub {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1rem;
+      color: #8b0000 !important;
+      margin: 8px 0 0 0;
+      text-shadow: 1px 1px 8px #0002;
     }
     /* --- Photo Film Section Styles --- */
     .photo-film-title {
@@ -166,10 +277,51 @@
     .photo-film-modal button {
       font-size:1rem; border-radius:6px; background:#8b0000; color:#fff; border:none; padding:5px 12px; cursor:pointer;font-family:'UnifrakturCook',cursive;
     }
+    /* Smaller Contact Section */
+    .contacts-section {
+      margin: 36px auto 0 auto;
+      max-width: 430px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 2px 10px #0001;
+      padding: 14px 8px 8px 8px;
+      text-align: center;
+      font-size: 0.96rem;
+    }
+    .contacts-section .gothic-section-title { font-size: 1.15rem; }
+    .social-icons { gap: 10px; margin-bottom: 8px; }
+    .social-icons a { width: 32px; height: 32px; font-size: 1.5rem; }
+    .contact-form {
+      margin: 8px auto 0 auto;
+      max-width: 240px;
+      padding: 5px 6px 8px 6px;
+      border-radius: 8px;
+      font-size:0.93rem;
+      border: 1.5px solid #8b0000;
+    }
+    .contact-form label { margin-bottom: 3px; font-size: 0.97rem;}
+    .contact-form input, .contact-form textarea {
+      padding: 5px;
+      margin-bottom: 7px;
+      border-radius: 6px;
+      font-size: 0.97rem;
+    }
+    .contact-form button { padding: 6px 14px; font-size: 0.98rem; margin-top: 5px;}
+    .form-success, .form-error { font-size: 0.97rem; margin-bottom: 5px;}
+    @media (max-width:900px) {
+      .main-grid { flex-direction: column; align-items: center;}
+      .timeline-grid { flex-direction: column; gap: 18px;}
+      .contacts-section { max-width: 97vw;}
+    }
+    @media (max-width:600px) {
+      .timeline-book { width: 96vw; max-width: 370px;}
+      .pencil-title { font-size: 2rem; }
+      .feather-img { width: 38px;}
+      .contacts-section { max-width: 99vw;}
+    }
   </style>
 </head>
 <body>
-  <!-- Curtain effect, overlay, header: all UNCHANGED -->
   <div class="overlay">
     <div class="pencil-title-container">
       <span class="pencil-title">Georgiana Mangiuchi</span>
@@ -237,7 +389,6 @@
         </div>
       </div>
     </div>
-    <!-- ... your timeline, contact, etc. unchanged ... -->
     <!-- Modal for Photo Film -->
     <div class="photo-film-modal-bg" id="photoFilmModalBg" tabindex="-1" aria-modal="true">
       <div class="photo-film-modal" id="photoFilmModal">
@@ -249,6 +400,101 @@
         <button id="photoFilmModalSave">Save</button>
       </div>
     </div>
+    <!-- The rest of your sections (timeline, contacts, etc) unchanged -->
+    <section class="timeline-section">
+      <div class="timeline-title">During the Years 1988 - 2025</div>
+      <div class="timeline-grid">
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">1988</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">1988</div>
+              <div class="event-info">
+                I was born in 1988, starting my life's journey surrounded by family and love.
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2006</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2006</div>
+              <div class="event-info">
+                Graduated high school with honors and unforgettable memories!
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2015</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2015</div>
+              <div class="event-info">
+                Began my professional adventure in my dream field.
+              </div>
+            </div>
+          </div>
+        </button>
+        <button class="timeline-book" tabindex="0">
+          <div class="book-inner">
+            <div class="book-front">
+              <div class="book-year">2025</div>
+              <div class="book-emboss"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="book-back">
+              <div class="year-title">2025</div>
+              <div class="event-info">
+                Looking forward to new achievements and beautiful moments!
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="gothic-accent-sub">Click a gothic book to open and see the story!</div>
+    </section>
+    <section class="contacts-section">
+      <h2 class="gothic-section-title">Contact & Social</h2>
+      <div class="social-icons">
+        <a href="https://facebook.com/yourprofile" target="_blank" title="Facebook"><i class="fab fa-facebook-square"></i></a>
+        <a href="https://instagram.com/yourprofile" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/yourprofile" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://tiktok.com/@yourprofile" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <div class="other-sites">
+        <strong>Other websites:</strong>
+        <a href="https://yourwebsite1.com" target="_blank">yourwebsite1.com</a>
+        <a href="https://yourwebsite2.com" target="_blank">yourwebsite2.com</a>
+      </div>
+      <form class="contact-form gothic-form" id="contactForm">
+        <div class="form-success" id="formSuccess" style="display:none;"></div>
+        <div class="form-error" id="formError" style="display:none;"></div>
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required>
+        <label for="message">Message</label>
+        <textarea id="message" rows="4" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+      <div style="margin-top:14px; color:#8b0000; font-family: 'UnifrakturCook', cursive; letter-spacing: 1px;">
+        <b>All messages will be sent to:</b> <span style="color:#8b0000;">mangiuchigeorgiana@gmail.com</span>
+      </div>
+    </section>
   </div>
   <script>
     // About Me toggle
@@ -259,7 +505,34 @@
     document.getElementById('treeCover').onclick = function() {
       document.getElementById('familyTreeSection').classList.toggle('active');
     };
-    // Photo Roll Logic
+    // Timeline Book Open/Close (only one open at a time)
+    document.querySelectorAll('.timeline-book').forEach((book, idx, allBooks) => {
+      book.addEventListener('click', function(e) {
+        if(this.classList.contains('open')) {
+          this.classList.remove('open');
+          return;
+        }
+        allBooks.forEach(b=>b.classList.remove('open'));
+        this.classList.add('open');
+      });
+      book.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    // Contact Form (demo only)
+    document.getElementById('contactForm').onsubmit = async function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').textContent = "Thank you! Your message was sent.";
+      document.getElementById('formSuccess').style.display = "block";
+      document.getElementById('formError').style.display = "none";
+      this.reset();
+      setTimeout(()=>{document.getElementById('formSuccess').style.display="none";},4000);
+    }
+    // ===== Photo Roll Logic =====
     const photoFilmInput = document.getElementById('photoFilmInput');
     const photoFilmImg = document.getElementById('photoFilmImg');
     const photoPrev = document.getElementById('photoPrev');
@@ -354,9 +627,7 @@
     });
     photoFilmModalYear.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
     photoFilmModalDesc.addEventListener('keydown', function(e){ if(e.key==='Enter') photoFilmModalSave.click(); });
-    // Initial state
     showPhotoFilm();
   </script>
-  <!-- ... your timeline, contact, etc. ... -->
 </body>
 </html>
